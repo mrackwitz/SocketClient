@@ -1,0 +1,21 @@
+{
+	"name": "SocketShuttle-SampleServers",
+	"author": "Marius Rackwitz <marius@paij.com>",
+	"description": "Sample servers for SocketShuttle.",
+	"version": "0.1.0",
+	"license": "MIT",
+	"private": 1,
+	"scripts": {
+		"start": "coffee faye_server.coffee"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mrackwitz/SocketShuttle.git"
+	},
+	"keywords": ["example", "web-socket", "bayeux", "faye"],
+	"dependencies": {
+		"faye": ">= 0.8.9",
+		"coffee-script": ">= 1.6.2",
+		"forever": ">= 0.10.8"
+	}
+}

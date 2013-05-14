@@ -1,28 +1,3 @@
-# SocketShuttle
-
-SocketShuttle is a Bayeux client implementation on top of [SocketRocket](https://github.com/square/SocketRocket), which is used as transport layer.
-
-
-## TODO
-
-* ~~Basic example~~
-    * ~~Create a basic Bayeux sample server~~
-    * ~~Create a basic sample app~~
-* Implement structured unit tests
-    * Add a test server
-    * Port [Faye's client cases](https://github.com/faye/faye/blob/master/spec/javascript/client_spec.js) to Cocoa/ObjC
-* Support ```hosts``` advice
-* Add method to delegate protocol which allows intercept and modify all non meta messages
-* Add Target to build for OS X
-
-
-## Authors
-
-* [Marius Rackwitz](git@mariusrackwitz.de)
-
-
-## License
-
 Copyright (c) 2013 Marius Rackwitz <marius@paij.com>
 
 The MIT License
@@ -44,4 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
