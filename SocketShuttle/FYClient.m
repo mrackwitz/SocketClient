@@ -86,7 +86,7 @@ typedef NS_ENUM(NSUInteger, FYClientState) {
  */
 typedef void(^FYReachabilityBlock)(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags);
 
-static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void* info) {
+static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void *info) {
     FYReachabilityBlock handler = ((__bridge_transfer typeof(FYReachabilityBlock))info);
     handler(target, flags);
 };
@@ -418,7 +418,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
          }.mutableCopy;
         
         // Observe UIApplication notifications
-        NSNotificationCenter* center = NSNotificationCenter.defaultCenter;
+        NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
         [center addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
         [center addObserver:self selector:@selector(applicationDidBecomeActive:)  name:UIApplicationDidBecomeActiveNotification  object:nil];
     }
@@ -504,7 +504,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     self.connectionExtension = extension;
     
     if (block) {
-        NSString* channel = FYMetaChannels.Connect;
+        NSString *channel = FYMetaChannels.Connect;
         if (self.awaitOnlyHandshake) {
             channel = FYMetaChannels.Handshake;
         }
@@ -538,17 +538,18 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 - (void)disconnect {
+    self.reconnecting = NO;
     self.persist = nil;
     [self sendDisconnect];
 }
 
 - (void)reconnect {
     // Save current channels
-    NSMutableDictionary* channels = self.channels.mutableCopy;
+    NSMutableDictionary *channels = self.channels.mutableCopy;
     [self connectWithExtension:self.connectionExtension onSuccess:self.isReconnecting ? nil : ^(FYClient *self) {
         // Re-subscript to channels on server-side
         self.channels = channels;
-        for (NSString* channel in channels) {
+        for (NSString *channel in channels) {
             // Send subscribe directly, without unboxing and re-boxing FYMessageCallbacks
             [self sendSubscribe:channel withExtension:[channels[channel] extension]];
         }
@@ -605,7 +606,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 - (void)subscribeChannels:(NSArray *)channels callback:(FYMessageCallback)callback extension:(NSDictionary *)extension {
     FYMessageCallbackWrapper *wrapper = [[FYMessageCallbackWrapper alloc] initWithCallback:callback extension:extension];
-    for (NSString* channel in channels) {
+    for (NSString *channel in channels) {
         [self validateChannel:channel];
         self.channels[channel] = wrapper;
     }
@@ -627,7 +628,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 - (void)unsubscribeAll {
-    for (NSString* channelName in self.channels) {
+    for (NSString *channelName in self.channels) {
         [self sendUnsubscribe:channelName];
     }
 }
@@ -708,7 +709,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
     self.state = FYClientStateDisconnected;
     
-    NSError* error;
+    NSError *error;
     if (!wasClean) {
         error = [NSError errorWithDomain:FYErrorDomain code:FYErrorSocketClosed userInfo:@{
              NSLocalizedDescriptionKey:        @"The socket connection was closed.",
@@ -923,7 +924,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     id result = [self deserializeString:message];
     if (![result isKindOfClass:NSArray.class]) {
         // Response is malformed
-        NSError* error = [NSError errorWithDomain:FYErrorDomain code:FYErrorMalformedJSONData userInfo:@{
+        NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorMalformedJSONData userInfo:@{
             NSLocalizedDescriptionKey:        @"Response is malformed.",
             NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Expected an array of messages, but got: %@.",
                                                result],
@@ -932,8 +933,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         return;
     }
     
-    NSArray* messages = result;
-    for (NSDictionary* userInfo in messages) {
+    NSArray *messages = result;
+    for (NSDictionary *userInfo in messages) {
         FYLog(@"handleResponse: %@", userInfo);
         
         // Box in message object to unserialize all fields
@@ -942,7 +943,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         BOOL handled = NO;
         
         // Check if its a meta channel message, which must be handled.
-        for (NSString* channel in self.metaChannelActors) {
+        for (NSString *channel in self.metaChannelActors) {
             if ([channel isEqualToString:message.channel]) {
                 id<FYActor> actor = self.metaChannelActors[channel];
                 [actor client:self receivedMessage:message];
@@ -954,7 +955,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         if (!handled) {
             if ([message.channel hasPrefix:@"/meta"]) {
                 // Unhandled meta channel
-                NSError* error = [NSError errorWithDomain:FYErrorDomain code:FYErrorUnhandledMetaChannelMessage userInfo:@{
+                NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorUnhandledMetaChannelMessage userInfo:@{
                     NSLocalizedDescriptionKey:        @"Unhandled meta channel message",
                     NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Unhandled meta channel message on "
                                                        "channel '%@'.", message.channel],
@@ -963,7 +964,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             } else if (self.channels[message.channel]) {
                 // User-defined channel
                 if (message.data) {
-                    FYMessageCallbackWrapper* wrapper = self.channels[message.channel];
+                    FYMessageCallbackWrapper *wrapper = self.channels[message.channel];
                     dispatch_async(self.callbackQueue, ^{
                         wrapper.callback(message.data);
                      });
@@ -992,7 +993,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         return;
     }
     
-    NSString* reconnectAdvice = message.advice[@"reconnect"];
+    NSString *reconnectAdvice = message.advice[@"reconnect"];
     if ([reconnectAdvice isEqualToString:@"retry"]) {
         // Use delay given by server, if available
         NSTimeInterval delay = FYClientReconnectInterval;
@@ -1143,7 +1144,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     #ifdef FYDebug
         options |= NSJSONWritingPrettyPrinted;
     #endif
-    NSData* data = [NSJSONSerialization dataWithJSONObject:object options:options error:&error];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:object options:options error:&error];
     if (error) {
         // Object data was malformed.
         NSError *fyError = [NSError errorWithDomain:FYErrorDomain code:FYErrorMalformedObjectData userInfo:@{
@@ -1182,7 +1183,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 - (void)performBlock:(void(^)(FYClient *))block afterDelay:(NSTimeInterval)delay {
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
-    __weak FYClient* this = self;
+    __weak FYClient *this = self;
     dispatch_after(popTime, self.workerQueue, ^{
         block(this);
      });
