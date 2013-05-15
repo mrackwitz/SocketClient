@@ -809,6 +809,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             case EHOSTUNREACH:   // No route to host
             {
                 // Use SystemConfiguration to await a network connection
+                __weak FYClient *client = self;
                 __block SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithName(NULL, self.baseURL.host.UTF8String);
                 SCNetworkReachabilityContext context = {
                     .info = (__bridge_retained void *)[^(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags){
@@ -826,8 +827,10 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                         ref = nil;
                         
                         // Try to reconnect
-                        [self performBlock:^(FYClient *client) {
-                            [self reconnect];
+                        [client performBlock:^(FYClient *client) {
+                            if (client && client.isReconnecting) {
+                                [client reconnect];
+                            }
                          } afterDelay:FYClientReconnectInterval];
                     } copy],
                  };
