@@ -44,17 +44,23 @@ extern NSString *const FYErrorDomain;
  @warning This is not part of an official standard.
  */
 typedef NS_ENUM(NSInteger, FYErrorGroup) {
+    /// The error occured in Transport layer.
+    FYErrorGroupTransport = (1<<9),
+    
     /// The error occured in Web Socket layer.
-    FYErrorGroupWebSocket = 100,
+    FYErrorGroupWebSocket = FYErrorGroupTransport | (1<<10),
+    
+    /// The error occured in HTTP layer.
+    FYErrorGroupHTTP = FYErrorGroupTransport | (1<<11),
     
     /// The error occured in JSON layer. (serialization / deserialization)
-    FYErrorGroupJSON = 200,
+    FYErrorGroupJSON = (1<<12),
     
     /// The error occured in Bayeux layer by a message which was not "successful".
-    FYErrorGroupBayeux = 300,
+    FYErrorGroupBayeux = (1<<13),
     
     /// The error occured in Bayeux layer by a message with an advice.
-    FYErrorGroupBayeuxAdvice = 400,
+    FYErrorGroupBayeuxAdvice = (1<<14),
 };
 
 /**
@@ -77,6 +83,10 @@ typedef NS_ENUM(NSInteger, FYErrorCode) {
     
     /// The socket connection is not opened, but required to be open.
     FYErrorSocketNotOpen = FYErrorGroupWebSocket | 2,
+    
+    
+    /// The HTTP request returned with an unexpected status code.
+    FYErrorHTTPUnexpectedStatusCode = FYErrorGroupHTTP | 1,
     
     
     /// The data to send response was malformed. (serialization)
