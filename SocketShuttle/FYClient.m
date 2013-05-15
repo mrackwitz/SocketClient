@@ -1044,7 +1044,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                self.baseURL.absoluteString],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
-        [self.delegate client:self failedWithError:error];
+        [self.delegateProxy client:self failedWithError:error];
     }
 }
 
@@ -1079,20 +1079,20 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                self.baseURL.absoluteString],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
-        [self.delegate client:self failedWithError:error];
+        [self.delegateProxy client:self failedWithError:error];
     }
 }
 
 - (void)client:(FYClient *)client receivedSubscribeMessage:(FYMessage *)message {
     if ([message.successful boolValue]) {
-        [self.delegate client:self subscriptionSucceedToChannel:message.subscription];
+        [self.delegateProxy client:self subscriptionSucceedToChannel:message.subscription];
     } else {
         // Subscription failed.
         NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorSubscribeFailed userInfo:@{
             NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Error subscribing to channel '%@'", message.subscription],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
-        [self.delegate client:self failedWithError:error];
+        [self.delegateProxy client:self failedWithError:error];
     }
 }
 
@@ -1105,7 +1105,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Error unsubscribing from channel '%@'", message.subscription],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
-        [self.delegate client:self failedWithError:error];
+        [self.delegateProxy client:self failedWithError:error];
     }
 }
 
