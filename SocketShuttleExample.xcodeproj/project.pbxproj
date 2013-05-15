@@ -23,6 +23,30 @@
 		71A5ECB6173C39690056AE98 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A5ECB5173C39690056AE98 /* libicucore.dylib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		714B2A061742898F00D03362 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71AC71651741365E004B2B72 /* SocketShuttle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 71AC71111741349A004B2B72;
+			remoteInfo = SocketShuttle;
+		};
+		714B2A081742898F00D03362 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71AC71651741365E004B2B72 /* SocketShuttle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 71AC71221741349A004B2B72;
+			remoteInfo = SocketShuttleTests;
+		};
+		714B2A291743C0C200D03362 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71AC71651741365E004B2B72 /* SocketShuttle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 71AC71101741349A004B2B72;
+			remoteInfo = SocketShuttle;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		7130150017394A6D0099C449 /* SocketShuttleExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocketShuttleExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7130150317394A6D0099C449 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -121,6 +145,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		714B2A011742898F00D03362 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				714B2A071742898F00D03362 /* libSocketShuttle.a */,
+				714B2A091742898F00D03362 /* SocketShuttleTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,6 +168,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				714B2A2A1743C0C200D03362 /* PBXTargetDependency */,
 			);
 			name = SocketShuttleExample;
 			productName = SocketShuttle;
@@ -161,12 +195,35 @@
 			mainGroup = 713014F717394A6D0099C449;
 			productRefGroup = 7130150117394A6D0099C449 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 714B2A011742898F00D03362 /* Products */;
+					ProjectRef = 71AC71651741365E004B2B72 /* SocketShuttle.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				713014FF17394A6D0099C449 /* SocketShuttleExample */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		714B2A071742898F00D03362 /* libSocketShuttle.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSocketShuttle.a;
+			remoteRef = 714B2A061742898F00D03362 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		714B2A091742898F00D03362 /* SocketShuttleTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SocketShuttleTests.octest;
+			remoteRef = 714B2A081742898F00D03362 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		713014FE17394A6D0099C449 /* Resources */ = {
@@ -193,6 +250,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		714B2A2A1743C0C200D03362 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketShuttle;
+			targetProxy = 714B2A291743C0C200D03362 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7130150C17394A6D0099C449 /* InfoPlist.strings */ = {
