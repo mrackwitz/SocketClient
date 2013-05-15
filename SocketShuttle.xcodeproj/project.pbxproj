@@ -29,6 +29,7 @@
 		714B29E61741718300D03362 /* FYMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AC714417413554004B2B72 /* FYMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		714B29E71741718600D03362 /* SocketShuttle.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AC713C174134C8004B2B72 /* SocketShuttle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		714B29EE1741746900D03362 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 714B29ED1741746900D03362 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		714B2A281743BEBD00D03362 /* SocketShuttle_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 714B2A261743B06900D03362 /* SocketShuttle_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		71AC71151741349A004B2B72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC71141741349A004B2B72 /* Foundation.framework */; };
 		71AC71241741349A004B2B72 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC71231741349A004B2B72 /* SenTestingKit.framework */; };
 		71AC71261741349A004B2B72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC71251741349A004B2B72 /* UIKit.framework */; };
@@ -106,6 +107,7 @@
 
 /* Begin PBXFileReference section */
 		714B29ED1741746900D03362 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
+		714B2A261743B06900D03362 /* SocketShuttle_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SocketShuttle_Private.h; sourceTree = "<group>"; };
 		71AC71111741349A004B2B72 /* libSocketShuttle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSocketShuttle.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		71AC71141741349A004B2B72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		71AC71221741349A004B2B72 /* SocketShuttleTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocketShuttleTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,6 +225,7 @@
 				71AC714417413554004B2B72 /* FYMessage.h */,
 				71AC714517413554004B2B72 /* FYMessage.m */,
 				71AC713C174134C8004B2B72 /* SocketShuttle.h */,
+				714B2A261743B06900D03362 /* SocketShuttle_Private.h */,
 			);
 			path = SocketShuttle;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				714B29E71741718600D03362 /* SocketShuttle.h in Headers */,
 				714B29EE1741746900D03362 /* SRWebSocket.h in Headers */,
 				714B29E31741717900D03362 /* FYActor.h in Headers */,
+				714B2A281743BEBD00D03362 /* SocketShuttle_Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
