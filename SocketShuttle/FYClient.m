@@ -301,6 +301,9 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 - (void)handshake;
 - (BOOL)isConnecting;
 
+// Channel subscription helper
+- (void)validateChannel:(NSString *)channel;
+
 // SRWebSocket facade methods
 - (void)openSocketConnection;
 - (void)closeSocketConnection;
@@ -576,13 +579,22 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 
+#pragma mark - Channel subscription helper
+
+- (void)validateChannel:(NSString *)channel {
+    NSAssert([channel hasPrefix:@"/"], @"A valid channel or channel pattern has to begin with a slash.");
+}
+
+
 #pragma mark - Channel subscription
 
 - (void)subscribeChannel:(NSString *)channel callback:(FYMessageCallback)callback {
+    [self validateChannel:channel];
     [self subscribeChannel:channel callback:callback extension:nil];
 }
 
 - (void)subscribeChannel:(NSString *)channel callback:(FYMessageCallback)callback extension:(NSDictionary *)extension {
+    [self validateChannel:channel];
     self.channels[channel] = [[FYMessageCallbackWrapper alloc] initWithCallback:callback extension:extension];
     [self sendSubscribe:channel withExtension:extension];
 }
@@ -594,17 +606,22 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 - (void)subscribeChannels:(NSArray *)channels callback:(FYMessageCallback)callback extension:(NSDictionary *)extension {
     FYMessageCallbackWrapper *wrapper = [[FYMessageCallbackWrapper alloc] initWithCallback:callback extension:extension];
     for (NSString* channel in channels) {
+        [self validateChannel:channel];
         self.channels[channel] = wrapper;
     }
     [self sendSubscribe:channels withExtension:extension];
 }
 
 - (void)unsubscribeChannel:(NSString *)channel {
+    [self validateChannel:channel];
     [self.channels removeObjectForKey:channel];
     [self sendUnsubscribe:channel];
 }
 
 - (void)unsubscribeChannels:(NSArray *)channels {
+    for (NSString *channel in channels) {
+        [self validateChannel:channel];
+    }
     [self.channels removeObjectsForKeys:channels];
     [self sendUnsubscribe:channels];
 }
