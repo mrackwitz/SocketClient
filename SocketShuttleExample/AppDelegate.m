@@ -71,7 +71,7 @@ void uncaughtExceptionHandler(NSException* exception) {
     NSLog(@"Received unexpected message: %@", message);
 }
 
-- (void)clientDisconnected:(FYClient *)client withMessage:(FYMessage *)message error:(NSError *)error {
+- (void)client:(FYClient *)client disconnectedWithMessage:(FYMessage *)message error:(NSError *)error {
     NSLog(@"Disconnect: %@ - %@", message, error);
     if (error.code == FYErrorSocketClosed) {
         [client reconnect];

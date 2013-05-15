@@ -93,7 +93,7 @@
  
  @param error     An error object describing what was going wrong.
  */
-- (void)clientDisconnected:(FYClient *)client withMessage:(FYMessage *)message error:(NSError *)error;
+- (void)client:(FYClient *)client disconnectedWithMessage:(FYMessage *)message error:(NSError *)error;
 
 /**
  The client had an internal error, which could effect the connection state and should be handled.

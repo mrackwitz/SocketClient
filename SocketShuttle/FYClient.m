@@ -718,7 +718,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     } else {
         FYLog(@"Clean exit");
     }
-    [self.delegateProxy clientDisconnected:self withMessage:nil error:error];
+    [self.delegateProxy client:self disconnectedWithMessage:nil error:error];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
@@ -1024,7 +1024,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                 NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Received reconnect advice 'none'."],
                 NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
              }];
-            [self.delegateProxy clientDisconnected:self withMessage:message error:error];
+            [self.delegateProxy client:self disconnectedWithMessage:message error:error];
         }
     }
 }
@@ -1047,7 +1047,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                    "Server supports the following: %@. Required was one of: %@.",
                                                    message.supportedConnectionTypes, FYSupportedConnectionTypes()]
              }];
-            [self.delegateProxy clientDisconnected:self withMessage:message error:error];
+            [self.delegateProxy client:self disconnectedWithMessage:message error:error];
             return;
         }
         
@@ -1084,7 +1084,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                "but Bayeux connection failed on host %@.", self.baseURL.absoluteString],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
-        [self.delegateProxy clientDisconnected:self withMessage:message error:error];
+        [self.delegateProxy client:self disconnectedWithMessage:message error:error];
     }
 }
 
@@ -1092,7 +1092,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     if ([message.successful boolValue]) {
         self.state = FYClientStateDisconnected;
         [self closeSocketConnection];
-        [self.delegateProxy clientDisconnected:self withMessage:message error:nil];
+        [self.delegateProxy client:self disconnectedWithMessage:message error:nil];
     } else {
         self.state = FYClientStateDisconnecting;
         
