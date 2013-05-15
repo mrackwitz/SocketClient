@@ -762,10 +762,12 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSHTTPURLResponse *response = objc_getAssociatedObject(connection, (__bridge const void *)(NSHTTPURLResponse.class));
         if (response.statusCode != 200) {
-            FYLog(@"Received error: %@", message);
-            
-            // TODO Handle error
-            // [self.delegateProxy client:self failedWithError:error];
+            NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorHTTPUnexpectedStatusCode userInfo:@{
+                NSLocalizedDescriptionKey:        @"The HTTP request returned with an unexpected status code.",
+                NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Received unexpected response with "
+                                                   "status code %d with content: %@.", response.statusCode, message]
+             }];
+            [self.delegateProxy client:self failedWithError:error];
         } else {
             [self handleResponse:message];
         }
