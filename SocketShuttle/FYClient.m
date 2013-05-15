@@ -164,7 +164,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 /**
  Dispatch queue on which delegate calls are executed.
  */
-@property (nonatomic, retain) dispatch_queue_t delegateQueue;
+@property (nonatomic) dispatch_queue_t delegateQueue;
 
 /**
  The proxied object.
@@ -204,6 +204,16 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             [invocation invokeWithTarget:self.proxiedObject];
          });
     }
+}
+
+- (void)setDelegateQueue:(dispatch_queue_t)delegateQueue {
+    if (delegateQueue) {
+        fy_dispatch_retain(delegateQueue);
+    }
+    if (_delegateQueue) {
+        fy_dispatch_release(_delegateQueue);
+    }
+    _delegateQueue = delegateQueue;
 }
 
 @end
@@ -441,14 +451,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 - (void)setDelegateQueue:(dispatch_queue_t)delegateQueue {
-    if (delegateQueue) {
-        fy_dispatch_retain(delegateQueue);
-    }
     NSAssert(self.delegateProxy, @"Delegate proxy has to be initialized before delegateQueue can be set.");
-    if (_callbackQueue) {
-        fy_dispatch_release(_delegateQueue);
-    }
-    self.callbackQueue = delegateQueue;
     self.delegateProxy.delegateQueue = delegateQueue;
 }
 
@@ -466,7 +469,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     if (_callbackQueue) {
         fy_dispatch_release(_callbackQueue);
     }
-    self.callbackQueue = callbackQueue;
+    _callbackQueue = callbackQueue;
 }
 
 

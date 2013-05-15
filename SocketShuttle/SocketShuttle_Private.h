@@ -27,7 +27,12 @@
 //  THE SOFTWARE.
 //
 
-// Adapted from SRWebSocket.h
+/**
+ Needed for compatiblity to versions below iOS 6.1, where ARC doesn't support automatic dispatch_retain
+ & dispatch_release.
+ 
+ Adapted from SRWebSocket.h
+ */
 #if OS_OBJECT_USE_OBJC_RETAIN_RELEASE
     #define fy_dispatch_retain(x)
     #define fy_dispatch_release(x)
