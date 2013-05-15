@@ -908,7 +908,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         // Response is malformed
         NSError* error = [NSError errorWithDomain:FYErrorDomain code:FYErrorMalformedJSONData userInfo:@{
             NSLocalizedDescriptionKey:        @"Response is malformed.",
-            NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Expected an array of messages, but got %@", result],
+            NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Expected an array of messages, but got: %@.",
+                                               result],
          }];
         [self.delegateProxy client:self failedWithError:error];
         return;
@@ -938,7 +939,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                 // Unhandled meta channel
                 NSError* error = [NSError errorWithDomain:FYErrorDomain code:FYErrorUnhandledMetaChannelMessage userInfo:@{
                     NSLocalizedDescriptionKey:        @"Unhandled meta channel message",
-                    NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Unhandled meta channel message on channel '%@'", message.channel],
+                    NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Unhandled meta channel message on "
+                                                       "channel '%@'.", message.channel],
                  }];
                 [self.delegateProxy client:self failedWithError:error];
             } else if (self.channels[message.channel]) {
@@ -1018,10 +1020,10 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         if (!commonSupportedConnectionTypes.count > 0) {
             // No common supported connection type.
             NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorNoCommonSupportedConnectionType userInfo:@{
-                NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Error while trying to connect with host %@",
-                                                   self.baseURL.absoluteString],
+                NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Error while trying to connect with host "
+                                                   "%@.", self.baseURL.absoluteString],
                 NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"No common supported connection type. "
-                                                   "Server supports the following: %@. Required was one of: %@",
+                                                   "Server supports the following: %@. Required was one of: %@.",
                                                    message.supportedConnectionTypes, FYSupportedConnectionTypes()]
              }];
             [self.delegateProxy clientDisconnected:self withMessage:message error:error];
@@ -1058,7 +1060,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         // Web socket connection was established, but Bayeux connection failed.
         NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorConnectFailed userInfo:@{
             NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Web Socket connection was established, "
-                                               "but Bayeux connection failed on host %@", self.baseURL.absoluteString],
+                                               "but Bayeux connection failed on host %@.", self.baseURL.absoluteString],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
         [self.delegateProxy clientDisconnected:self withMessage:message error:error];
@@ -1089,7 +1091,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     } else {
         // Subscription failed.
         NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorSubscribeFailed userInfo:@{
-            NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Error subscribing to channel '%@'", message.subscription],
+            NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Error subscribing to channel '%@'.",
+                                               message.subscription],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
         [self.delegateProxy client:self failedWithError:error];
@@ -1102,7 +1105,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     } else {
         // Unsubscription failed.
         NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorUnsubscribeFailed userInfo:@{
-            NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Error unsubscribing from channel '%@'", message.subscription],
+            NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Error unsubscribing from channel '%@'.",
+                                               message.subscription],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
         [self.delegateProxy client:self failedWithError:error];
