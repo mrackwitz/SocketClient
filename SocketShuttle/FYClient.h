@@ -136,12 +136,12 @@ typedef void(^FYMessageCallback)(NSDictionary *userInfo);
 /**
  Dispatch queue on which delegate calls are executed.
  */
-@property (nonatomic, retain) dispatch_queue_t delegateQueue;
+@property (nonatomic) dispatch_queue_t delegateQueue;
 
 /**
  Dispatch queue on which callback block call are executed.
  */
-@property (nonatomic, retain) dispatch_queue_t callbackQueue;
+@property (nonatomic) dispatch_queue_t callbackQueue;
 
 /**
  All subscripted channels

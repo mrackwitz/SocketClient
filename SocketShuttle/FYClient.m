@@ -34,6 +34,7 @@
 #import <UIKit/UIKit.h>
 #import "FYClient.h"
 #import "FYActor.h"
+#import "SocketShuttle_Private.h"
 
 
 //#define FYDebug 1
@@ -344,13 +345,22 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 @implementation FYClient
 
+// Exclude properties from automatic synthesization
 @dynamic connected;
+@dynamic delegateQueue;
 
 - (id)init {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"Don't use [%@ %@]You must use the designated initializer: %@.",
                                            self.class, NSStringFromSelector(_cmd), NSStringFromSelector(@selector(initWithURL:))]
                                  userInfo:nil];
+}
+
+- (void)dealloc {
+    // Explicitly assign nil to provoke memory management
+    self.callbackQueue = nil;
+    self.delegateQueue = nil;
+    self.workerQueue   = nil;
 }
 
 - (id)initWithURL:(NSURL *)baseURL {
@@ -428,12 +438,32 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 - (void)setDelegateQueue:(dispatch_queue_t)delegateQueue {
+    if (delegateQueue) {
+        fy_dispatch_retain(delegateQueue);
+    }
     NSAssert(self.delegateProxy, @"Delegate proxy has to be initialized before delegateQueue can be set.");
+    if (_callbackQueue) {
+        fy_dispatch_release(_delegateQueue);
+    }
+    self.callbackQueue = delegateQueue;
     self.delegateProxy.delegateQueue = delegateQueue;
 }
 
 - (dispatch_queue_t)delegateQueue {
     return self.delegateProxy.delegateQueue;
+}
+
+
+#pragma mark - Compatiblity to versions below iOS 6.1, where ARC doesn't support automatic dispatch_retain & dispatch_release
+
+- (void)setCallbackQueue:(dispatch_queue_t)callbackQueue {
+    if (callbackQueue) {
+        fy_dispatch_retain(callbackQueue);
+    }
+    if (_callbackQueue) {
+        fy_dispatch_release(_callbackQueue);
+    }
+    self.callbackQueue = callbackQueue;
 }
 
 
