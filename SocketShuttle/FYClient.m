@@ -412,7 +412,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         
         // Init connection behavior flags
         self.maySendHandshakeAsync = YES;
-        self.awaitOnlyHandshake    = NO;
+        self.awaitOnlyHandshake    = YES;
         
         // Bind own message handler selectors dynamically to meta channel names
         id<FYActor>(^makeActor)(SEL) = ^id<FYActor>(SEL selector){

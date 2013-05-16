@@ -108,7 +108,7 @@ typedef void(^FYMessageCallback)(NSDictionary *userInfo);
  then executes the success block. If property's value is YES, the client will execute success block on success of
  the Bayeux handshake message. This can speed up the connection process.
  
- Default is NO.
+ Default is YES.
  */
 @property (nonatomic, assign) BOOL awaitOnlyHandshake;
 
