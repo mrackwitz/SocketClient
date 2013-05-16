@@ -34,7 +34,7 @@ void uncaughtExceptionHandler(NSException* exception) {
     // Init uncaught exception handler to pretty print stack traces
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
-    FYClient* client = [[[FYClient alloc] initWithURL:[NSURL URLWithString:@"http://localhost:8000/faye"]] persist];
+    FYClient* client = [[FYClient alloc] initWithURL:[NSURL URLWithString:@"http://localhost:8000/faye"]];
     client.delegate = self;
     [client connectOnSuccess:^(FYClient *client) {
         [client subscribeChannel:@"/test" callback:^(NSDictionary *userInfo){
