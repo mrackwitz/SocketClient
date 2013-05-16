@@ -403,7 +403,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         self.delegateQueue = dispatch_get_main_queue();
         self.callbackQueue = dispatch_get_main_queue();
         
-        // Init collections
+        // Init channel collection
         self.channels = [NSMutableDictionary new];
         
         // Init state properties
@@ -835,7 +835,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                 [client reconnect];
                             }
                          } afterDelay:FYClientReconnectInterval];
-                    } copy],
+                     } copy],
                  };
                 
                 SCNetworkReachabilitySetCallback(ref, FYReachabilityCallback, &context);
