@@ -297,7 +297,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 @property (nonatomic, retain, readwrite) NSMutableDictionary *channels;
 
 @property (nonatomic, retain) FYDelegateProxy *delegateProxy;
-@property (nonatomic, retain) dispatch_queue_t workerQueue;
+@property (nonatomic) dispatch_queue_t workerQueue;
 
 // TODO: Enumerate hosts
 //@property (nonatomic, retain) NSMutableArray *alternateHosts;
@@ -473,6 +473,16 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         fy_dispatch_release(_callbackQueue);
     }
     _callbackQueue = callbackQueue;
+}
+
+- (void)setWorkerQueue:(dispatch_queue_t)workerQueue {
+    if (workerQueue) {
+        fy_dispatch_retain(workerQueue);
+    }
+    if (_workerQueue) {
+        fy_dispatch_release(_workerQueue);
+    }
+    _workerQueue = workerQueue;
 }
 
 
