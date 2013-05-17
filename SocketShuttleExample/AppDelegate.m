@@ -37,26 +37,32 @@ void uncaughtExceptionHandler(NSException* exception) {
     FYClient* client = [[FYClient alloc] initWithURL:[NSURL URLWithString:@"http://localhost:8000/faye"]];
     client.delegate = self;
     [client connectOnSuccess:^(FYClient *client) {
-        [client subscribeChannel:@"/test" callback:^(NSDictionary *userInfo){
+        [client subscribeChannel:@"/count" callback:^(NSDictionary *userInfo){
             NSLog(@"Current number: %d", [userInfo[@"number"] intValue]);
             
-            // Increment
-            [client publish:@{
-                    @"sender": UIDevice.currentDevice.model,
-                    @"number": @([userInfo[@"number"] intValue] + 1)
-                } onChannel:@"/test"];
+            /*// Increment
+            [self performSelector:@selector(publishCount:)
+                       withObject:@([userInfo[@"number"] intValue] + 1)
+                       afterDelay:1];*/
          }];
         
         // Begin counting
         [client publish:@{
                 @"sender": UIDevice.currentDevice.model,
                 @"number": @1
-            } onChannel:@"/test"];
+            } onChannel:@"/count"];
      }];
     
     self.client = client;
     
     return YES;
+}
+
+- (void)publishCount:(NSNumber *)number {
+    [self.client publish:@{
+        @"sender": UIDevice.currentDevice.model,
+        @"number": number
+     } onChannel:@"/count"];
 }
 
 - (void)clientConnected:(FYClient *)client {
