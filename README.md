@@ -26,23 +26,23 @@ SocketShuttle is a Bayeux client implementation on top of [SocketRocket](https:/
 
 3. Drop **SocketShuttle.xcodeproj** in your project navigator.
 
-    ![Step 3](https://io.github.com/mrackwitz/SocketShuttle/images/step_3.png)
+    ![Step 3](http://mrackwitz.github.io/SocketShuttle/images/step_3.png)
 
-4. Add ![Target SocketShuttle](https://io.github.com/mrackwitz/SocketShuttle/images/target.png).
+4. Add ![Target SocketShuttle](http://mrackwitz.github.io/SocketShuttle/images/target.png).
 
-    ![Step 4](https://io.github.com/mrackwitz/SocketShuttle/images/step_4.png)
+    ![Step 4](http://mrackwitz.github.io/SocketShuttle/images/step_4.png)
 
 5. Add library **libSocketShuttle.a** to your project.
 
-    ![Step 5](https://io.github.com/mrackwitz/SocketShuttle/images/step_5.png)
+    ![Step 5](http://mrackwitz.github.io/SocketShuttle/images/step_5.png)
 
 6. Add library **libicucore.dylib** to your project.
 
-    ![Step 6](https://io.github.com/mrackwitz/SocketShuttle/images/step_6.png)
+    ![Step 6](http://mrackwitz.github.io/SocketShuttle/images/step_6.png)
 
 7. (Ensure that library was placed in group **Frameworks**.)
 
-    ![Step 7](https://io.github.com/mrackwitz/SocketShuttle/images/step_7.png)
+    ![Step 7](http://mrackwitz.github.io/SocketShuttle/images/step_7.png)
 
 8. ```import <SocketShuttle/SocketShuttle.h>``` where ever you want to use the library. You could add it to your header prefix file, if you want.
 
