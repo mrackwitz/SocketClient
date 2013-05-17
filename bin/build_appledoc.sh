@@ -26,13 +26,13 @@ appledoc \
 	--install-docset \
 	--publish-docset \
 	--index-desc README.md \
-    --docset-bundle-id com.paij.SocketShuttle \
-    --docset-bundle-name SocketShuttle \
-    --docset-feed-url 'http://mrackwitz.github.io/SocketShuttle/doc/com.paij.SocketShuttle.atom' \
-    --docset-package-url 'com.paij.SocketShuttle' \
-    --docset-publisher-name paij  \
-    --docset-platform-family iOS \
-    --ignore build \
-    .
+	--docset-bundle-id com.paij.SocketShuttle \
+	--docset-bundle-name SocketShuttle \
+	--docset-feed-url 'http://mrackwitz.github.io/SocketShuttle/doc/com.paij.SocketShuttle.atom' \
+	--docset-package-url 'com.paij.SocketShuttle' \
+	--docset-publisher-name paij  \
+	--docset-platform-family iOS \
+	--ignore build \
+	.
 
 PATH=$_PATH
