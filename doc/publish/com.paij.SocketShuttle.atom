@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:docset="http://developer.apple.com/rss/docset_extensions" xml:lang="en">
+    <id>http://mrackwitz.github.io/SocketShuttle/doc/com.paij.SocketShuttle.atom/20130517151958</id>
+    <title type="text">SocketShuttle Documentation</title>
+    <rights>Copyright © 2013 redpixtec. GmbH. All rights reserved.</rights>
+    <link rel="self" href="http://mrackwitz.github.io/SocketShuttle/doc/com.paij.SocketShuttle.atom"></link>
+    <docset:publisherName>paij</docset:publisherName>
+    <docset:publisherID>com.paij.documentation</docset:publisherID>
+    <updated>2013-05-17T15:19:58+02:00</updated>
+    <entry>
+        <id>tag:mrackwitz.github.io,2013-05-17:com.paij.SocketShuttle/0.1.0</id>
+        <title type="text">SocketShuttle</title>
+        <updated>2013-05-17T15:19:58+02:00</updated>
+        <content type="text">SocketShuttle (v0.1.0)</content>
+        <link rel="enclosure" type="application/octet-stream" href="com.paij.SocketShuttle" length="112282"></link>
+        <docset:identifier>com.paij.SocketShuttle</docset:identifier>
+        <docset:version>0.1.0</docset:version>
+        <docset:minimumXcodeVersion>3.0.0</docset:minimumXcodeVersion>
+    </entry>
+</feed>

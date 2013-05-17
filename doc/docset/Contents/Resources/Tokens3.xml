@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/FYDelegateProxy.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/FYDelegateProxy</TokenIdentifier>
+			<Abstract type="html">An instance of FYDelegateProxy is used internally in FYClient to dispatch calls to its delegate.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYDelegateProxy/setDelegateQueue:</TokenIdentifier>
+			<Abstract type="html">Dispatch queue on which delegate calls are executed.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) dispatch_queue_t delegateQueue</Declaration>
+			
+			
+			<Anchor>//api/name/delegateQueue</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYDelegateProxy/delegateQueue</TokenIdentifier>
+			<Abstract type="html">Dispatch queue on which delegate calls are executed.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) dispatch_queue_t delegateQueue</Declaration>
+			
+			
+			<Anchor>//api/name/delegateQueue</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYDelegateProxy/setProxiedObject:</TokenIdentifier>
+			<Abstract type="html">The proxied object.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) id&lt;NSObject,FYClientDelegate&gt; proxiedObject</Declaration>
+			
+			
+			<Anchor>//api/name/proxiedObject</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYDelegateProxy/proxiedObject</TokenIdentifier>
+			<Abstract type="html">The proxied object.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) id&lt;NSObject,FYClientDelegate&gt; proxiedObject</Declaration>
+			
+			
+			<Anchor>//api/name/proxiedObject</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

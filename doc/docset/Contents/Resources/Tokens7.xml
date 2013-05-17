@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SRIOConsumer.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SRIOConsumer</TokenIdentifier>
+			<Abstract type="html">TODO specify error better!</Abstract>
+			<DeclaredIn>SRWebSocket.m</DeclaredIn>
+			
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+	</File>
+</Tokens>

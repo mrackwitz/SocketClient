@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/FYMessageCallbackWrapper.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/FYMessageCallbackWrapper</TokenIdentifier>
+			<Abstract type="html">Blocks needs to be copied, when stored. Because you can use one single block as callback for multiple subscripted
+channels and we don&apos;t want to copy the block for each channel, use a wrapper object, which copy the block once and
+which will be released first, if all references, which are held each by a channel, were released by unsubscripting
+all these channels.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>
+			
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYMessageCallbackWrapper/setCallback:</TokenIdentifier>
+			<Abstract type="html">Wrapper block callback.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) FYMessageCallback callback</Declaration>
+			
+			
+			<Anchor>//api/name/callback</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYMessageCallbackWrapper/callback</TokenIdentifier>
+			<Abstract type="html">Wrapper block callback.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) FYMessageCallback callback</Declaration>
+			
+			
+			<Anchor>//api/name/callback</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYMessageCallbackWrapper/setExtension:</TokenIdentifier>
+			<Abstract type="html">Channel extension used to subscribe.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSDictionary *extension</Declaration>
+			
+			
+			<Anchor>//api/name/extension</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYMessageCallbackWrapper/extension</TokenIdentifier>
+			<Abstract type="html">Channel extension used to subscribe.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSDictionary *extension</Declaration>
+			
+			
+			<Anchor>//api/name/extension</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYMessageCallbackWrapper/initWithCallback:extension:</TokenIdentifier>
+			<Abstract type="html">Initializer</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
+			
+			<Declaration>- (id)initWithCallback:(FYMessageCallback)callback extension:(NSDictionary *)extension</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>callback</Name>
+					<Abstract type="html">The block, which should be wrapped.</Abstract>
+				</Parameter><Parameter>
+					<Name>extension</Name>
+					<Abstract type="html">An extension as an arbitrary JSON encodeable object according to [ext documentation][45].</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithCallback:extension:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

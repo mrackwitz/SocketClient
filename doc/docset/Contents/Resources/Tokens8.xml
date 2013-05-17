@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSDate+Helper.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSDate(Helper)</TokenIdentifier>
+			<Abstract type="html">Internal category for &apos;FYMessage&apos; to parse RFC3339 strings into &apos;NSDate&apos;.</Abstract>
+			<DeclaredIn>FYMessage.m</DeclaredIn>
+			
+			<NodeRef refid="8"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDate(Helper)/dateWithRFC3339String:</TokenIdentifier>
+			<Abstract type="html">Get a &apos;NSDate&apos; instance by parsing a RFC3339 string by &apos;NSDateFormatter&apos;.</Abstract>
+			<DeclaredIn>FYMessage.m</DeclaredIn>			
+			
+			<Declaration>+ (NSDate *)dateWithRFC3339String:(NSString *)dateString</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>dateString</Name>
+					<Abstract type="html">a RFC3339 string</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/dateWithRFC3339String:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

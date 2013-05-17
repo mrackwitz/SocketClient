@@ -1,0 +1,758 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>FYClientDelegate Protocol Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">SocketShuttle </a></h1>
+				<a id="developerHome" href="../index.html">redpixtec. GmbH</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">FYClientDelegate Protocol Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/client:disconnectedWithMessage:error:">&nbsp;&nbsp;&nbsp;&nbsp;- client:disconnectedWithMessage:error:</option>
+	
+	<option value="//api/name/client:failedWithError:">&nbsp;&nbsp;&nbsp;&nbsp;- client:failedWithError:</option>
+	
+	<option value="//api/name/client:receivedUnexpectedMessage:">&nbsp;&nbsp;&nbsp;&nbsp;- client:receivedUnexpectedMessage:</option>
+	
+	<option value="//api/name/client:subscriptionSucceedToChannel:">&nbsp;&nbsp;&nbsp;&nbsp;- client:subscriptionSucceedToChannel:</option>
+	
+	<option value="//api/name/clientConnected:">&nbsp;&nbsp;&nbsp;&nbsp;- clientConnected:</option>
+	
+	<option value="//api/name/clientWasAdvisedToHandshake:shouldRetry:">&nbsp;&nbsp;&nbsp;&nbsp;- clientWasAdvisedToHandshake:shouldRetry:</option>
+	
+	<option value="//api/name/clientWasAdvisedToRetry:retryInterval:">&nbsp;&nbsp;&nbsp;&nbsp;- clientWasAdvisedToRetry:retryInterval:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/client:disconnectedWithMessage:error:">client:disconnectedWithMessage:error:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/client:failedWithError:">client:failedWithError:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/client:receivedUnexpectedMessage:">client:receivedUnexpectedMessage:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/client:subscriptionSucceedToChannel:">client:subscriptionSucceedToChannel:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/clientConnected:">clientConnected:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/clientWasAdvisedToHandshake:shouldRetry:">clientWasAdvisedToHandshake:shouldRetry:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/clientWasAdvisedToRetry:retryInterval:">clientWasAdvisedToRetry:retryInterval:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="FYClientDelegate Protocol Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">FYClientDelegate Protocol Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">FYClientDelegate.h</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>FYClientDelegate</code> protocol is used to receive state information and intercept methods.
+All defined messages are optional to implement.</p>
+
+<p>In the internal used <a href="../Classes/FYDelegateProxy.html"><code>FYDelegateProxy</code></a> the messages are invocated on the real delegate using
+<NSInvocation>. So it will in case of extension not possible to grasp the return value of
+non-void messages. Therefore <code>inout</code>-pointers are used.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/clientConnected:">&ndash;&nbsp;clientConnected:</a></code>
+		<span class="tooltip"><p>The client was successfully connected.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/client:subscriptionSucceedToChannel:">&ndash;&nbsp;client:subscriptionSucceedToChannel:</a></code>
+		<span class="tooltip"><p>The subscription to a channel succeed.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/client:receivedUnexpectedMessage:">&ndash;&nbsp;client:receivedUnexpectedMessage:</a></code>
+		<span class="tooltip"><p>The client received an unexpected message.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/client:disconnectedWithMessage:error:">&ndash;&nbsp;client:disconnectedWithMessage:error:</a></code>
+		<span class="tooltip"><p>The client was disconnected.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/client:failedWithError:">&ndash;&nbsp;client:failedWithError:</a></code>
+		<span class="tooltip"><p>The client had an internal error, which could effect the connection state and should be handled.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/clientWasAdvisedToRetry:retryInterval:">&ndash;&nbsp;clientWasAdvisedToRetry:retryInterval:</a></code>
+		<span class="tooltip"><p>The client was advised to retry by doing a connect.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/clientWasAdvisedToHandshake:shouldRetry:">&ndash;&nbsp;clientWasAdvisedToHandshake:shouldRetry:</a></code>
+		<span class="tooltip"><p>The client was advised to retry by doing a handshake.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/client:disconnectedWithMessage:error:" title="client:disconnectedWithMessage:error:"></a>
+	<h3 class="subsubtitle method-title">client:disconnectedWithMessage:error:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The client was disconnected.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)client:(FYClient *)<em>client</em> disconnectedWithMessage:(FYMessage *)<em>message</em> error:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>client</em></dt>
+			<dd><p>The client which was disconnected.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>message</em></dt>
+			<dd><p>The message which led to the connection fail.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>An error object describing what was going wrong.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The client was disconnected.</p>
+
+<p>Some event led to an disconnect, either successfull because wished, or because the connection failed, than an error
+message is given.
+If error is given and a message is given, then the connection failed in Bayeux or BayeuxAdvice level.
+If error is given and no message is given, then the underlying web socket connection failed.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FYClientDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/client:failedWithError:" title="client:failedWithError:"></a>
+	<h3 class="subsubtitle method-title">client:failedWithError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The client had an internal error, which could effect the connection state and should be handled.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)client:(FYClient *)<em>client</em> failedWithError:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>client</em></dt>
+			<dd><p>The client which failed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>An error object describing what was going wrong.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The client had an internal error, which could effect the connection state and should be handled.</p>
+
+<p>There was an internal error in communication, which was neither caused by an internal inconsistency (, which should
+have led to a crash) nor by a connection problem. The delegate has to decide on its own how to react.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FYClientDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/client:receivedUnexpectedMessage:" title="client:receivedUnexpectedMessage:"></a>
+	<h3 class="subsubtitle method-title">client:receivedUnexpectedMessage:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The client received an unexpected message.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)client:(FYClient *)<em>client</em> receivedUnexpectedMessage:(FYMessage *)<em>message</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>client</em></dt>
+			<dd><p>The client which received an unexpected message.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>message</em></dt>
+			<dd><p>The channel to which the subscription succeed.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The client received an unexpected message.</p>
+
+<p>This is called when the client received a message on a channel, which is not matched to a registrated callback.
+This could be handled in a custom manner and does not lead to a fail.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FYClientDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/client:subscriptionSucceedToChannel:" title="client:subscriptionSucceedToChannel:"></a>
+	<h3 class="subsubtitle method-title">client:subscriptionSucceedToChannel:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The subscription to a channel succeed.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)client:(FYClient *)<em>client</em> subscriptionSucceedToChannel:(NSString *)<em>channel</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>client</em></dt>
+			<dd><p>The client whose channel subscription succeed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>channel</em></dt>
+			<dd><p>The channel to which the subscription succeed.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The subscription to a channel succeed.</p>
+
+<p>This is sent when the subscription to a channel was confirmed and the client will receive events on this channel with
+the registrated callback.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FYClientDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/clientConnected:" title="clientConnected:"></a>
+	<h3 class="subsubtitle method-title">clientConnected:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The client was successfully connected.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)clientConnected:(FYClient *)<em>client</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>client</em></dt>
+			<dd><p>The client whose connection was established.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The client was successfully connected.</p>
+
+<p>This is sent after web socket open, Bayeux handshake and Bayeux connect were successfully executed.
+The client is now read for channel subscriptions or event publications.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FYClientDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/clientWasAdvisedToHandshake:shouldRetry:" title="clientWasAdvisedToHandshake:shouldRetry:"></a>
+	<h3 class="subsubtitle method-title">clientWasAdvisedToHandshake:shouldRetry:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The client was advised to retry by doing a handshake.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)clientWasAdvisedToHandshake:(FYClient *)<em>client</em> shouldRetry:(inout BOOL *)<em>retry</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>client</em></dt>
+			<dd><p>The client which was advised to retry.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>retry</em></dt>
+			<dd><p>Is by default given as NO.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The client was advised to retry by doing a handshake.</p>
+
+<p>The server has terminated any prior connection status and the client MUST reconnect with a /meta/handshake message.
+A client MUST NOT automatically retry if handshake reconnect has been received.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FYClientDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/clientWasAdvisedToRetry:retryInterval:" title="clientWasAdvisedToRetry:retryInterval:"></a>
+	<h3 class="subsubtitle method-title">clientWasAdvisedToRetry:retryInterval:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The client was advised to retry by doing a connect.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)clientWasAdvisedToRetry:(FYClient *)<em>client</em> retryInterval:(inout NSTimeInterval *)<em>interval</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>client</em></dt>
+			<dd><p>The client which was advised to retry.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>interval</em></dt>
+			<dd><p>Is by default given either as defined by server&rsquo;s &ldquo;interval&rdquo; advice or by client-default backoff.
+Values lower then zero will cause that no reconnect is tried.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The client was advised to retry by doing a connect.</p>
+
+<p>The client MAY attempt to reconnect with a /meta/connect after the interval (as defined by &ldquo;interval&rdquo; advice or
+client-default backoff), and with the same credentials.
+Can be used to implement a backoff strategy to increase the interval if requests to the server fail without new advice
+being received from the server.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FYClientDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 redpixtec. GmbH. All rights reserved. (Last updated: 2013-05-17)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

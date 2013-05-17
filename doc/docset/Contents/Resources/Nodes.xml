@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocSetNodes version="1.0">
+    <TOC>
+        <Node type="folder">
+            <Name>SocketShuttle</Name>
+            <Path>index.html</Path>
+			<Subnodes>
+                
+				
+				<Node type="folder">
+					<Name>Classes</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="1"/>
+						<NodeRef refid="2"/>
+						<NodeRef refid="3"/>
+						<NodeRef refid="4"/>
+						<NodeRef refid="5"/>
+						<NodeRef refid="6"/>
+						<NodeRef refid="7"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				<Node type="folder">
+					<Name>Categories</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="8"/>
+						<NodeRef refid="9"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				<Node type="folder">
+					<Name>Protocols</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="10"/>
+						<NodeRef refid="11"/>
+						
+					</Subnodes>
+				</Node>
+				
+			</Subnodes>
+        </Node>
+    </TOC>
+	<Library>
+		
+		<Node id="1">
+			<Name>FYBlockActor</Name>
+			<Path>Classes/FYBlockActor.html</Path>
+		</Node>
+		<Node id="2">
+			<Name>FYClient</Name>
+			<Path>Classes/FYClient.html</Path>
+		</Node>
+		<Node id="3">
+			<Name>FYDelegateProxy</Name>
+			<Path>Classes/FYDelegateProxy.html</Path>
+		</Node>
+		<Node id="4">
+			<Name>FYMessage</Name>
+			<Path>Classes/FYMessage.html</Path>
+		</Node>
+		<Node id="5">
+			<Name>FYMessageCallbackWrapper</Name>
+			<Path>Classes/FYMessageCallbackWrapper.html</Path>
+		</Node>
+		<Node id="6">
+			<Name>FYSelTargetActor</Name>
+			<Path>Classes/FYSelTargetActor.html</Path>
+		</Node>
+		<Node id="7">
+			<Name>SRIOConsumer</Name>
+			<Path>Classes/SRIOConsumer.html</Path>
+		</Node>
+		
+		<Node id="8">
+			<Name>NSDate(Helper)</Name>
+			<Path>Categories/NSDate+Helper.html</Path>
+		</Node>
+		<Node id="9">
+			<Name>NSURL(ReplaceHost)</Name>
+			<Path>Categories/NSURL+ReplaceHost.html</Path>
+		</Node>
+		
+		<Node id="10">
+			<Name>FYActor</Name>
+			<Path>Protocols/FYActor.html</Path>
+		</Node>
+		<Node id="11">
+			<Name>FYClientDelegate</Name>
+			<Path>Protocols/FYClientDelegate.html</Path>
+		</Node>
+		
+	</Library>
+</DocSetNodes>

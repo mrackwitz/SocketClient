@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.paij.SocketShuttle</string>
+	<key>CFBundleName</key>
+	<string>SocketShuttle</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1.0</string>
+	<key>CFBundleVersion</key>
+	<string>0.1.0</string>
+	
+	
+	
+	
+	<key>DocSetFeedName</key>
+	<string>SocketShuttle Documentation</string>
+	<key>DocSetFeedURL</key>
+	<string>http://mrackwitz.github.io/SocketShuttle/doc/com.paij.SocketShuttle.atom</string>
+	<key>DocSetMinimumXcodeVersion</key>
+	<string>3.0</string>
+	<key>DocSetPlatformFamily</key>
+	<string>iOS</string>
+	<key>DashDocSetFamily</key>
+	<string>appledoc</string>
+	<key>DocSetPublisherIdentifier</key>
+	<string>com.paij.documentation</string>
+	<key>DocSetPublisherName</key>
+	<string>paij</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2013 redpixtec. GmbH. All rights reserved.</string>
+</dict>
+</plist>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/FYActor.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/FYActor</TokenIdentifier>
+			<Abstract type="html">Used to dynamically bind to meta channel messages.</Abstract>
+			<DeclaredIn>FYActor.h</DeclaredIn>
+			
+			<NodeRef refid="10"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/FYActor/client:receivedMessage:</TokenIdentifier>
+			<Abstract type="html">The given message was received by the given client.</Abstract>
+			<DeclaredIn>FYActor.h</DeclaredIn>			
+			
+			<Declaration>- (void)client:(FYClient *)client receivedMessage:(FYMessage *)message</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>client</Name>
+					<Abstract type="html">The client who received the message.</Abstract>
+				</Parameter><Parameter>
+					<Name>message</Name>
+					<Abstract type="html">The message which was received.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/client:receivedMessage:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSURL+ReplaceHost.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSURL(ReplaceHost)</TokenIdentifier>
+			<Abstract type="html">Internal category for &apos;FYClient&apos; to replace host name with arguments from hosts advice, to fulfill this advice on
+connection problems.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>
+			
+			<NodeRef refid="9"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSURL(ReplaceHost)/URLWithScheme:host:</TokenIdentifier>
+			<Abstract type="html">Replaces the host in an URL with another host.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
+			
+			<Declaration>- (NSURL *)URLWithScheme:(NSString *)scheme host:(NSString *)host</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>scheme</Name>
+					<Abstract type="html">The scheme of the new URL conforming to RFC 1808.</Abstract>
+				</Parameter><Parameter>
+					<Name>host</Name>
+					<Abstract type="html">The host of the new URL conforming to RFC 1808.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/URLWithScheme:host:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/FYClient.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/FYClient</TokenIdentifier>
+			<Abstract type="html">The FYClient object is used to setup and manage requests to servers using the Bayeux protocol.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setBaseURL:</TokenIdentifier>
+			<Abstract type="html">Base URL to which the underlying web socket connection will be connected.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain, readonly) NSURL *baseURL</Declaration>
+			
+			
+			<Anchor>//api/name/baseURL</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/baseURL</TokenIdentifier>
+			<Abstract type="html">Base URL to which the underlying web socket connection will be connected.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain, readonly) NSURL *baseURL</Declaration>
+			
+			
+			<Anchor>//api/name/baseURL</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setClientId:</TokenIdentifier>
+			<Abstract type="html">[FYMessage clientId] which was received by Bayeux handshake.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain, readonly) NSString *clientId</Declaration>
+			
+			
+			<Anchor>//api/name/clientId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/clientId</TokenIdentifier>
+			<Abstract type="html">[FYMessage clientId] which was received by Bayeux handshake.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain, readonly) NSString *clientId</Declaration>
+			
+			
+			<Anchor>//api/name/clientId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setMaySendHandshakeAsync:</TokenIdentifier>
+			<Abstract type="html">Flag for behavior of connectOnSuccess:.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL maySendHandshakeAsync</Declaration>
+			
+			
+			<Anchor>//api/name/maySendHandshakeAsync</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/maySendHandshakeAsync</TokenIdentifier>
+			<Abstract type="html">Flag for behavior of connectOnSuccess:.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL maySendHandshakeAsync</Declaration>
+			
+			
+			<Anchor>//api/name/maySendHandshakeAsync</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setAwaitOnlyHandshake:</TokenIdentifier>
+			<Abstract type="html">Flag for behavior of connectOnSuccess:.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL awaitOnlyHandshake</Declaration>
+			
+			
+			<Anchor>//api/name/awaitOnlyHandshake</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/awaitOnlyHandshake</TokenIdentifier>
+			<Abstract type="html">Flag for behavior of connectOnSuccess:.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL awaitOnlyHandshake</Declaration>
+			
+			
+			<Anchor>//api/name/awaitOnlyHandshake</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setConnected:</TokenIdentifier>
+			<Abstract type="html">Check if client is connected</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isConnected) BOOL connected</Declaration>
+			
+			
+			<Anchor>//api/name/connected</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/connected</TokenIdentifier>
+			<Abstract type="html">Check if client is connected</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isConnected) BOOL connected</Declaration>
+			
+			
+			<Anchor>//api/name/connected</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setReconnecting:</TokenIdentifier>
+			<Abstract type="html">Check if a client is reconnecting, currently.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isReconnecting) BOOL reconnecting</Declaration>
+			
+			
+			<Anchor>//api/name/reconnecting</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/reconnecting</TokenIdentifier>
+			<Abstract type="html">Check if a client is reconnecting, currently.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isReconnecting) BOOL reconnecting</Declaration>
+			
+			
+			<Anchor>//api/name/reconnecting</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setRetryTimeInterval:</TokenIdentifier>
+			<Abstract type="html">Last received or last modified retryTimeInterval to be used between the receive of a successful connect message and a
+new request on the channel /meta/connect.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSTimeInterval retryTimeInterval</Declaration>
+			
+			
+			<Anchor>//api/name/retryTimeInterval</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/retryTimeInterval</TokenIdentifier>
+			<Abstract type="html">Last received or last modified retryTimeInterval to be used between the receive of a successful connect message and a
+new request on the channel /meta/connect.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSTimeInterval retryTimeInterval</Declaration>
+			
+			
+			<Anchor>//api/name/retryTimeInterval</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setReconnectTimeInterval:</TokenIdentifier>
+			<Abstract type="html">Reconnect interval on web socket connection lost. This time is waited by default until a new connect try occurs.
+A negative value will disable all reconnect tries when connection was lost.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSTimeInterval reconnectTimeInterval</Declaration>
+			
+			
+			<Anchor>//api/name/reconnectTimeInterval</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/reconnectTimeInterval</TokenIdentifier>
+			<Abstract type="html">Reconnect interval on web socket connection lost. This time is waited by default until a new connect try occurs.
+A negative value will disable all reconnect tries when connection was lost.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSTimeInterval reconnectTimeInterval</Declaration>
+			
+			
+			<Anchor>//api/name/reconnectTimeInterval</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setDelegate:</TokenIdentifier>
+			<Abstract type="html">Delegate to handle state transitions and errors, should be set direct after initialization of an &lt;FYClient&gt;
+object.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) id&lt;FYClientDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/delegate</TokenIdentifier>
+			<Abstract type="html">Delegate to handle state transitions and errors, should be set direct after initialization of an &lt;FYClient&gt;
+object.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) id&lt;FYClientDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setDelegateQueue:</TokenIdentifier>
+			<Abstract type="html">Dispatch queue on which delegate calls are executed.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) dispatch_queue_t delegateQueue</Declaration>
+			
+			
+			<Anchor>//api/name/delegateQueue</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/delegateQueue</TokenIdentifier>
+			<Abstract type="html">Dispatch queue on which delegate calls are executed.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) dispatch_queue_t delegateQueue</Declaration>
+			
+			
+			<Anchor>//api/name/delegateQueue</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setCallbackQueue:</TokenIdentifier>
+			<Abstract type="html">Dispatch queue on which callback block call are executed.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) dispatch_queue_t callbackQueue</Declaration>
+			
+			
+			<Anchor>//api/name/callbackQueue</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/callbackQueue</TokenIdentifier>
+			<Abstract type="html">Dispatch queue on which callback block call are executed.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) dispatch_queue_t callbackQueue</Declaration>
+			
+			
+			<Anchor>//api/name/callbackQueue</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setSubscriptedChannels:</TokenIdentifier>
+			<Abstract type="html">All subscripted channels</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSArray *subscriptedChannels</Declaration>
+			
+			
+			<Anchor>//api/name/subscriptedChannels</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/subscriptedChannels</TokenIdentifier>
+			<Abstract type="html">All subscripted channels</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSArray *subscriptedChannels</Declaration>
+			
+			
+			<Anchor>//api/name/subscriptedChannels</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/setWebSocket:</TokenIdentifier>
+			<Abstract type="html">Underlying web socket implementation</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain, readonly) SRWebSocket *webSocket</Declaration>
+			
+			
+			<Anchor>//api/name/webSocket</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYClient/webSocket</TokenIdentifier>
+			<Abstract type="html">Underlying web socket implementation</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain, readonly) SRWebSocket *webSocket</Declaration>
+			
+			
+			<Anchor>//api/name/webSocket</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/initWithURL:</TokenIdentifier>
+			<Abstract type="html">Initializer</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithURL:(NSURL *)baseURL</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>baseURL</Name>
+					<Abstract type="html">server URL whose scheme has to fulfill /ws(s)?|http(s)?/.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithURL:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/persist</TokenIdentifier>
+			<Abstract type="html">Calling persist will cause that the client must not be retained by yourself until a explicit disconnect occurs.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (id)persist</Declaration>
+			
+			
+			<Anchor>//api/name/persist</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/connect</TokenIdentifier>
+			<Abstract type="html">Open a web socket connection and connect the receiver to its bound server.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)connect</Declaration>
+			
+			
+			<Anchor>//api/name/connect</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/connectWithExtension:</TokenIdentifier>
+			<Abstract type="html">Open a web socket connection and connect the receiver to its bound server with an extension object.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)connectWithExtension:(NSDictionary *)extension</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>extension</Name>
+					<Abstract type="html">An extension as an arbitrary JSON encodeable object according to [ext documentation][45].
+If argument is &apos;nil&apos;, then this method will do the same as [FYClient connect].</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/connectWithExtension:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/connectOnSuccess:</TokenIdentifier>
+			<Abstract type="html">Open a web socket connection and connect the receiver to its bound server with an extension object and a block which
+is executed on success.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)connectOnSuccess:(void ( ^ ) ( FYClient *))block</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>block</Name>
+					<Abstract type="html">Will be asynchronically called on success of operation. Receiver is given as argument to the block.
+Will be executed on callbackQueue.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/connectOnSuccess:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/connectWithExtension:onSuccess:</TokenIdentifier>
+			<Abstract type="html">Open a web socket connection and connect the receiver to its bound server with an extension object and a block which
+is executed on success.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)connectWithExtension:(NSDictionary *)extension onSuccess:(void ( ^ ) ( FYClient *))block</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>extension</Name>
+					<Abstract type="html">An extension as an arbitrary JSON encodeable object according to
+If argument is &apos;nil&apos;, then this method will do the same as [FYClient connectOnSuccess:].</Abstract>
+				</Parameter><Parameter>
+					<Name>block</Name>
+					<Abstract type="html">Will be asynchronically called on success of operation. Receiver is given as argument to the block.
+Will be executed on callbackQueue.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/connectWithExtension:onSuccess:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/disconnect</TokenIdentifier>
+			<Abstract type="html">Disconnect an instance from its bound server and closes its underlying web socket connection.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)disconnect</Declaration>
+			
+			
+			<Anchor>//api/name/disconnect</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/reconnect</TokenIdentifier>
+			<Abstract type="html">Reconnect could be used to try to establish the connection state before the last disconnect.
+This includes to re-subscript all prior subscripted channels. The channel callbacks are kept.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)reconnect</Declaration>
+			
+			
+			<Anchor>//api/name/reconnect</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/subscribeChannel:callback:</TokenIdentifier>
+			<Abstract type="html">Register interest in a channel and request that messages published to that channel are delivered to receiver.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)subscribeChannel:(NSString *)channel callback:(FYMessageCallback)callback</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>channel</Name>
+					<Abstract type="html">Subscribe to a channel name or a channel pattern</Abstract>
+				</Parameter><Parameter>
+					<Name>callback</Name>
+					<Abstract type="html">Will be called on receive of a message on given channel on main thread</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/subscribeChannel:callback:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/subscribeChannel:callback:extension:</TokenIdentifier>
+			<Abstract type="html">Register interest in a channel and request that messages published to that channel are delivered to receiver.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)subscribeChannel:(NSString *)channel callback:(FYMessageCallback)callback extension:(NSDictionary *)extension</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>channel</Name>
+					<Abstract type="html">Subscribe to a channel name or a channel pattern</Abstract>
+				</Parameter><Parameter>
+					<Name>callback</Name>
+					<Abstract type="html">Will be called on receive of a message on given channel on main thread</Abstract>
+				</Parameter><Parameter>
+					<Name>extension</Name>
+					<Abstract type="html">An extension as an arbitrary JSON encodeable object according to [ext documentation][45].</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/subscribeChannel:callback:extension:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/subscribeChannels:callback:</TokenIdentifier>
+			<Abstract type="html">Register interest in a channel and request that messages published to that channel are delivered to receiver.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)subscribeChannels:(NSArray *)channels callback:(FYMessageCallback)callback</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>channels</Name>
+					<Abstract type="html">Subscribe to an array of channel names and channel patterns</Abstract>
+				</Parameter><Parameter>
+					<Name>callback</Name>
+					<Abstract type="html">Will be called on receive of a message on given &apos;channel&apos; on main thread</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/subscribeChannels:callback:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/subscribeChannels:callback:extension:</TokenIdentifier>
+			<Abstract type="html">Register interest in a channel and request that messages published to that channel are delivered to receiver.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)subscribeChannels:(NSArray *)channels callback:(FYMessageCallback)callback extension:(NSDictionary *)extension</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>channels</Name>
+					<Abstract type="html">Subscribe to an array of channel names and channel patterns</Abstract>
+				</Parameter><Parameter>
+					<Name>callback</Name>
+					<Abstract type="html">Will be called on receive of a message on given &apos;channel&apos; on main thread</Abstract>
+				</Parameter><Parameter>
+					<Name>extension</Name>
+					<Abstract type="html">An extension as an arbitrary JSON encodeable object according to [ext documentation][45].</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/subscribeChannels:callback:extension:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/unsubscribeChannel:</TokenIdentifier>
+			<Abstract type="html">Cancel interest in a channel and request that messages published to that channel are not delivered.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)unsubscribeChannel:(NSString *)channel</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>channel</Name>
+					<Abstract type="html">Subscribe to a channel name or a channel pattern</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/unsubscribeChannel:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/unsubscribeChannels:</TokenIdentifier>
+			<Abstract type="html">Cancel interest in a channel and request that messages published to that channel are not delivered.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)unsubscribeChannels:(NSArray *)channels</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>channels</Name>
+					<Abstract type="html">Subscribe to an array of channel names and channel patterns</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/unsubscribeChannels:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/unsubscribeAll</TokenIdentifier>
+			<Abstract type="html">Cancel interest in all channels and request that messages published to that channels are not delivered.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)unsubscribeAll</Declaration>
+			
+			
+			<Anchor>//api/name/unsubscribeAll</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/publish:onChannel:</TokenIdentifier>
+			<Abstract type="html">Publish events on a channel by sending event messages.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)publish:(NSDictionary *)userInfo onChannel:(NSString *)channel</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>userInfo</Name>
+					<Abstract type="html">The message as an arbitrary JSON encodeable object</Abstract>
+				</Parameter><Parameter>
+					<Name>channel</Name>
+					<Abstract type="html">Subscribe to a channel name or a channel pattern</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/publish:onChannel:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYClient/publish:onChannel:withExtension:</TokenIdentifier>
+			<Abstract type="html">Publish events on a channel by sending event messages with an extension object.</Abstract>
+			<DeclaredIn>FYClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)publish:(NSDictionary *)userInfo onChannel:(NSString *)channel withExtension:(NSDictionary *)extension</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>userInfo</Name>
+					<Abstract type="html">The message as an arbitrary JSON encodeable object</Abstract>
+				</Parameter><Parameter>
+					<Name>channel</Name>
+					<Abstract type="html">Subscribe to a channel name or a channel pattern</Abstract>
+				</Parameter><Parameter>
+					<Name>extension</Name>
+					<Abstract type="html">An extension as an arbitrary JSON encodeable object according to [ext documentation][45].</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/publish:onChannel:withExtension:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

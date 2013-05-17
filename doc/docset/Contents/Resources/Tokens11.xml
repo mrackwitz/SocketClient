@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/FYClientDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/FYClientDelegate</TokenIdentifier>
+			<Abstract type="html">The FYClientDelegate protocol is used to receive state information and intercept methods.
+All defined messages are optional to implement.</Abstract>
+			<DeclaredIn>FYClientDelegate.h</DeclaredIn>
+			
+			<NodeRef refid="11"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/FYClientDelegate/clientConnected:</TokenIdentifier>
+			<Abstract type="html">The client was successfully connected.</Abstract>
+			<DeclaredIn>FYClientDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)clientConnected:(FYClient *)client</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>client</Name>
+					<Abstract type="html">The client whose connection was established.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/clientConnected:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/FYClientDelegate/client:subscriptionSucceedToChannel:</TokenIdentifier>
+			<Abstract type="html">The subscription to a channel succeed.</Abstract>
+			<DeclaredIn>FYClientDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)client:(FYClient *)client subscriptionSucceedToChannel:(NSString *)channel</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>client</Name>
+					<Abstract type="html">The client whose channel subscription succeed.</Abstract>
+				</Parameter><Parameter>
+					<Name>channel</Name>
+					<Abstract type="html">The channel to which the subscription succeed.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/client:subscriptionSucceedToChannel:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/FYClientDelegate/client:receivedUnexpectedMessage:</TokenIdentifier>
+			<Abstract type="html">The client received an unexpected message.</Abstract>
+			<DeclaredIn>FYClientDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)client:(FYClient *)client receivedUnexpectedMessage:(FYMessage *)message</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>client</Name>
+					<Abstract type="html">The client which received an unexpected message.</Abstract>
+				</Parameter><Parameter>
+					<Name>message</Name>
+					<Abstract type="html">The channel to which the subscription succeed.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/client:receivedUnexpectedMessage:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/FYClientDelegate/client:disconnectedWithMessage:error:</TokenIdentifier>
+			<Abstract type="html">The client was disconnected.</Abstract>
+			<DeclaredIn>FYClientDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)client:(FYClient *)client disconnectedWithMessage:(FYMessage *)message error:(NSError *)error</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>client</Name>
+					<Abstract type="html">The client which was disconnected.</Abstract>
+				</Parameter><Parameter>
+					<Name>message</Name>
+					<Abstract type="html">The message which led to the connection fail.</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract type="html">An error object describing what was going wrong.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/client:disconnectedWithMessage:error:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/FYClientDelegate/client:failedWithError:</TokenIdentifier>
+			<Abstract type="html">The client had an internal error, which could effect the connection state and should be handled.</Abstract>
+			<DeclaredIn>FYClientDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)client:(FYClient *)client failedWithError:(NSError *)error</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>client</Name>
+					<Abstract type="html">The client which failed.</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract type="html">An error object describing what was going wrong.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/client:failedWithError:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/FYClientDelegate/clientWasAdvisedToRetry:retryInterval:</TokenIdentifier>
+			<Abstract type="html">The client was advised to retry by doing a connect.</Abstract>
+			<DeclaredIn>FYClientDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)clientWasAdvisedToRetry:(FYClient *)client retryInterval:(inout NSTimeInterval *)interval</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>client</Name>
+					<Abstract type="html">The client which was advised to retry.</Abstract>
+				</Parameter><Parameter>
+					<Name>interval</Name>
+					<Abstract type="html">Is by default given either as defined by server&apos;s &quot;interval&quot; advice or by client-default backoff.
+Values lower then zero will cause that no reconnect is tried.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/clientWasAdvisedToRetry:retryInterval:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/FYClientDelegate/clientWasAdvisedToHandshake:shouldRetry:</TokenIdentifier>
+			<Abstract type="html">The client was advised to retry by doing a handshake.</Abstract>
+			<DeclaredIn>FYClientDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)clientWasAdvisedToHandshake:(FYClient *)client shouldRetry:(inout BOOL *)retry</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>client</Name>
+					<Abstract type="html">The client which was advised to retry.</Abstract>
+				</Parameter><Parameter>
+					<Name>retry</Name>
+					<Abstract type="html">Is by default given as NO.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/clientWasAdvisedToHandshake:shouldRetry:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
