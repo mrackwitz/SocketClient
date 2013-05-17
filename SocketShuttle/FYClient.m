@@ -46,7 +46,8 @@
 #endif
 
 
-const NSTimeInterval FYClientReconnectInterval = 45;
+const NSTimeInterval FYClientRetryTimeInterval     = 45;
+const NSTimeInterval FYClientReconnectTimeInterval = 45;
 
 NSString *const FYWorkerQueueName = @"com.paij.SocketShuttle.FYClient";
 
@@ -411,7 +412,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         self.shouldReconnectOnDidBecomeActive = NO;
         
         // Init connection parameters
-        self.retryTimeInterval = FYClientReconnectInterval;
+        self.retryTimeInterval     = FYClientRetryTimeInterval;
+        self.reconnectTimeInterval = FYClientReconnectTimeInterval;
         self.maySendHandshakeAsync = YES;
         self.awaitOnlyHandshake    = YES;
         
@@ -551,13 +553,14 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     // Save current channels
     NSMutableDictionary *channels = self.channels.mutableCopy;
     [self connectWithExtension:self.connectionExtension onSuccess:self.isReconnecting ? nil : ^(FYClient *self) {
-        // Re-subscript to channels on server-side
-        self.channels = channels;
-        for (NSString *channel in channels) {
-            // Send subscribe directly, without unboxing and re-boxing FYMessageCallbacks
-            [self sendSubscribe:channel withExtension:[channels[channel] extension]];
+        if (self.state > FYClientStateConnecting) {
+            // Re-subscript to channels on server-side
+            self.channels = channels;
+            for (NSString *channel in channels) {
+                // Send subscribe directly, without unboxing and re-boxing FYMessageCallbacks
+                [self sendSubscribe:channel withExtension:[channels[channel] extension]];
+            }
         }
-        
         self.reconnecting = NO;
      }];
     self.reconnecting = YES;
@@ -770,7 +773,9 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             
             // Set HTTP headers
             NSDictionary *headers = @{
-                @"Content-Type": @"application/json",
+                @"Accept":          @"application/json",
+                @"Accept-Encoding": @"gzip",
+                @"Content-Type":    @"application/json",
              };
             // TODO Add here a delegate method to further initialize requests header fields for authorization
             // with inout &headers
@@ -827,6 +832,13 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 - (void)handlePOSIXError:(NSError *)error {
     NSParameterAssert([error.domain isEqualToString:NSPOSIXErrorDomain]);
+    
+    if (self.reconnectTimeInterval < 0) {
+        // We will handle some errors by trying to reconnect under certain conditions, but reconnect is disabled, so we
+        // don't need to do anything further here.
+        return;
+    }
+    
     if ([error.domain isEqualToString:NSPOSIXErrorDomain]) {
         switch (error.code) {
             case ENETDOWN:       // Network is down
@@ -853,11 +865,12 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                         ref = nil;
                         
                         // Try to reconnect
-                        [client performBlock:^(FYClient *client) {
-                            if (client && client.isReconnecting) {
+                        if (!client.isReconnecting && client.reconnectTimeInterval > 0) {
+                            if (client && client.state != FYClientStateDisconnected) {
+                                // Reconnect if client was not disconnected meanwhile
                                 [client reconnect];
                             }
-                         } afterDelay:FYClientReconnectInterval];
+                        }
                      } copy],
                  };
                 
@@ -873,7 +886,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                 // Try to reconnect
                 [self performBlock:^(FYClient *client) {
                     [self reconnect];
-                 } afterDelay:FYClientReconnectInterval];
+                 } afterDelay:self.reconnectTimeInterval];
                 break;
         }
     }
@@ -1026,7 +1039,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     NSString *reconnectAdvice = message.advice[@"reconnect"];
     if ([reconnectAdvice isEqualToString:@"retry"]) {
         // Use delay given by server, if available
-        NSTimeInterval delay = FYClientReconnectInterval;
+        NSTimeInterval delay = self.retryTimeInterval;
         if (message.advice[@"interval"]) {
             // Interval is given in milliseconds, NSTimeInterval is in seconds.
             delay = [message.advice[@"interval"] doubleValue] / 1000.0;
@@ -1035,8 +1048,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         // Let delegate implementation customize given delay
         [self.delegateProxy clientWasAdvisedToRetry:self retryInterval:&delay];
         
-        if (delay != 0) {
-            self.retryTimeInterval = FYClientReconnectInterval;
+        if (delay == 0) {
+            self.retryTimeInterval = FYClientRetryTimeInterval;
         } else {
             self.retryTimeInterval = delay;
         }
@@ -1091,8 +1104,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                 self.state = FYClientStateConnected;
                 
                 // Schedule the first keep-alive connect.
-                // DON'T send this immediately. This would cause (at least with Faye 0.8.9) an exceeding of the retry interval,
-                // which will cause a timeout/disconnet.
+                // DON'T send this immediately. This would cause (at least with Faye 0.8.9) an exceeding of the retry
+                // interval, which will cause a timeout/disconnet.
                 [self scheduleKeepAlive];
             }
         } else {

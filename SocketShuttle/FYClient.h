@@ -62,7 +62,13 @@ extern NSArray *FYSupportedConnectionTypes();
 /**
  Default reconnect interval on `message.attempt.reconnect = retry` if no "interval" attempt was given by the server.
  */
-extern const NSTimeInterval FYClientReconnectInterval;
+extern const NSTimeInterval FYClientRetryTimeInterval;
+
+/**
+ Default reconnect interval on web socket connection lost. This time is waited by default until a new connect try
+ occurs.
+ */
+extern const NSTimeInterval FYClientReconnectTimeInterval;
 
 /**
  Callback for user-defined channel subscriptions.
@@ -128,10 +134,16 @@ typedef void(^FYMessageCallback)(NSDictionary *userInfo);
 @property (nonatomic, assign, readonly, getter=isReconnecting) BOOL reconnecting;
 
 /**
- Last received retryTimeInterval to be used between the receive of a successful connect message and a new request on
- the channel /meta/connect.
+ Last received or last modified retryTimeInterval to be used between the receive of a successful connect message and a
+ new request on the channel /meta/connect.
  */
 @property (nonatomic, assign) NSTimeInterval retryTimeInterval;
+
+/**
+ Reconnect interval on web socket connection lost. This time is waited by default until a new connect try occurs.
+ A negative value will disable all reconnect tries when connection was lost.
+ */
+@property (nonatomic, assign) NSTimeInterval reconnectTimeInterval;
 
 /**
  Delegate to handle state transitions and errors, should be set direct after initialization of an <FYClient>
