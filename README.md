@@ -18,7 +18,7 @@ SocketShuttle is a Bayeux client implementation on top of [SocketRocket](https:/
 
 ## Credits
 
-* jverkoey's [iOS-Framework](https://github.com/jverkoey/iOS-Framework) licensed under <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />.
+* jverkoey's [iOS-Framework](https://github.com/jverkoey/iOS-Framework) licensed under <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a>.
 * Square's [SocketRocket](https://github.com/square/SocketRocket) licensed under [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 
