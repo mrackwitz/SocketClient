@@ -33,6 +33,7 @@ appledoc \
 	--docset-publisher-name paij  \
 	--docset-platform-family iOS \
 	--ignore build \
+	--ignore pages \
 	.
 
 PATH=$_PATH
