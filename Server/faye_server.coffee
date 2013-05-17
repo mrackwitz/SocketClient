@@ -2,11 +2,13 @@
 # 
 # == Channels:
 #  * /count:
-#    Count numbers messages up, if they don't rely from sender "server", which is used
-#    to identify own messages.
+#    Count number messages up, if they don't come from sender "server", which is used
+#    to identify own count messages.
+#    Published messages SHOULD have a field "sender".
+#    Published messages MUST have a field "number".
 #
 
-http = require 'http',
+http = require 'http'
 faye = require 'faye'
 
 
@@ -27,14 +29,14 @@ server = http.createServer (request, response) ->
 
 # React to count events
 bayeux.getClient().subscribe '/count', (message) ->
-    console.log '{ sender: %s, count: %d }',
-      message.sender, message.count
+    console.log '{ sender: %s, number: %d }',
+      message.sender, message.number
     
     if (message.sender is not 'server')
         message.sender = 'server'
         bayeux.getClient().publish '/count',
              sender: 'server',
-             count:  message.count + 1
+             number: message.number + 1
 
 
 bayeux.attach server
