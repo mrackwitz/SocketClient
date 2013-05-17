@@ -1,12 +1,20 @@
 ### Programs and Options Used in Commands
 
 XCODE_BUILD_OPTS = -arch i386 VALID_ARCHS=i386 ARCH=i386 ONLY_ACTIVE_ARCH=NO
+
 XCODE_BUILD_WORKSPACE = xcodebuild \
 		-workspace SocketShuttle.xcworkspace \
 		-sdk iphonesimulator \
 		$(XCODE_BUILD_OPTS)
 
-FOREVER = server/node_modules/forever/bin/forever
+FOREVER = mkdir -p build/forever && server/node_modules/forever/bin/forever -w \
+		-c coffee \
+		-m 1 \
+		-o $(CURDIR)/build/forever/server.out \
+		--pidFile $(CURDIR)/build/forever/server.pid \
+		--minUptime 1000 \
+		--spinSleepTime 1000 \
+
 SERVER_EXECUTABLE = server/faye_server.coffee
 
 
