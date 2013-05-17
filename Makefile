@@ -81,10 +81,19 @@ build-doc:
 publish-doc: build-doc
 	cd pages; \
 	git checkout -B gh-pages; \
-	cp -R ../build/* .; \
+	cp -R ../build/doc .; \
+	cp -R ../build/products .; \
 	git add -A; \
 	git commit -m "Updated doc"; \
-	git push origin gh-pages
+	git push origin gh-pages; \
+	cd ..; \
+	git stash push; \
+	LAST_SYMBOLIC_REF=git symbolic-ref --short HEAD; \
+	git checkout master; \
+	git add pages; \
+	git commit -m "Updated doc"; \
+	git push origin master; \
+	git checkout $LAST_SYMBOLIC_REF
 
 
 ### Support Targets:
