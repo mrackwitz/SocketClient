@@ -128,6 +128,12 @@ typedef void(^FYMessageCallback)(NSDictionary *userInfo);
 @property (nonatomic, assign, readonly, getter=isReconnecting) BOOL reconnecting;
 
 /**
+ Last received retryTimeInterval to be used between the receive of a successful connect message and a new request on
+ the channel /meta/connect.
+ */
+@property (nonatomic, assign) NSTimeInterval retryTimeInterval;
+
+/**
  Delegate to handle state transitions and errors, should be set direct after initialization of an <FYClient>
  object.
  */

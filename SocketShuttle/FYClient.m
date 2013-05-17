@@ -46,7 +46,7 @@
 #endif
 
 
-const NSTimeInterval FYClientReconnectInterval  = 1;
+const NSTimeInterval FYClientReconnectInterval = 45;
 
 NSString *const FYWorkerQueueName = @"com.paij.SocketShuttle.FYClient";
 
@@ -72,8 +72,7 @@ const NSUInteger FYClientStateSetIsConnecting = (1<<2);
 typedef NS_ENUM(NSUInteger, FYClientState) {
     FYClientStateDisconnected    = 0,
     FYClientStateHandshaking     = FYClientStateSetIsConnecting | 1,
-    FYClientStateWillSendConnect = FYClientStateSetIsConnecting | 2,
-    FYClientStateConnecting      = FYClientStateSetIsConnecting | 3,
+    FYClientStateConnecting      = FYClientStateSetIsConnecting | 2,
     FYClientStateConnected       = (1<<3),
     FYClientStateDisconnecting   = (1<<4),
 };
@@ -309,6 +308,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 // Protected connection status methods
 - (void)handshake;
+- (void)scheduleKeepAlive;
 - (BOOL)isConnecting;
 
 // Channel subscription helper
@@ -410,7 +410,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         self.state = FYClientStateDisconnected;
         self.shouldReconnectOnDidBecomeActive = NO;
         
-        // Init connection behavior flags
+        // Init connection parameters
+        self.retryTimeInterval = FYClientReconnectInterval;
         self.maySendHandshakeAsync = YES;
         self.awaitOnlyHandshake    = YES;
         
@@ -579,7 +580,24 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 - (void)handshake {
     self.clientId = nil;
+    self.state = FYClientStateHandshaking;
     [self sendHandshake];
+}
+
+- (void)scheduleKeepAlive {
+    FYLog(@"Scheduled a keep-alive connect in %.3f.", self.retryTimeInterval);
+    if (self.retryTimeInterval > 0) {
+        // Schedule the next keep-alive connect.
+        [self performBlock:^(FYClient *client) {
+            // Check if the client is still connected, or if we may received an advice, which caused a handshake or
+            // a disconnect. So we prevent unnecessary connect messages and especially connect message without
+            // clientIds which would cause an exception.
+            if (client.state == FYClientStateConnected && self.clientId) {
+                FYLog(@"Send scheduled keep-alive connect at: %.3f.", [NSDate.date timeIntervalSince1970]);
+                [client sendConnect];
+            }
+        } afterDelay:self.retryTimeInterval];
+    }
 }
 
 
@@ -697,8 +715,13 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 - (void)webSocketDidOpen:(SRWebSocket *)aWebSocket {
     if (self.maySendHandshakeAsync) {
-        if (self.state == FYClientStateWillSendConnect) {
-            [self sendConnect];
+        // Handshake was already sent.
+        if (self.state == FYClientStateConnecting) {
+            self.state = FYClientStateConnected;
+            
+            // Successful response to handshake was already received, but socket was not open, so we must schedule the
+            // first connect here.
+            [self scheduleKeepAlive];
         }
     } else {
         [self handshake];
@@ -948,6 +971,14 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         
         BOOL handled = NO;
         
+        // Handle advice before handling meta channel message, so the retryTimeInterval can be modified before the
+        // handshake occurs which will schedule the first connect message.
+        if (message.advice) {
+            if (message.advice[@"reconnect"]) {
+                [self handleReconnectAdviceOfMessage:message];
+            }
+        }
+        
         // Check if its a meta channel message, which must be handled.
         for (NSString *channel in self.metaChannelActors) {
             if ([channel isEqualToString:message.channel]) {
@@ -980,13 +1011,6 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                 [self.delegateProxy client:self receivedUnexpectedMessage:message];
             }
         }
-        
-        // Handle advice
-        if (message.advice) {
-            if (message.advice[@"reconnect"]) {
-                [self handleReconnectAdviceOfMessage:message];
-            }
-        }
     }
 }
 
@@ -1007,11 +1031,14 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             // Interval is given in milliseconds, NSTimeInterval is in seconds.
             delay = [message.advice[@"interval"] doubleValue] / 1000.0;
         }
+        
+        // Let delegate implementation customize given delay
         [self.delegateProxy clientWasAdvisedToRetry:self retryInterval:&delay];
-        if (delay > 0) {
-            [self performBlock:^(FYClient *client) {
-                [self sendConnect];
-             } afterDelay:delay];
+        
+        if (delay != 0) {
+            self.retryTimeInterval = FYClientReconnectInterval;
+        } else {
+            self.retryTimeInterval = delay;
         }
     } else if ([reconnectAdvice isEqualToString:@"handshake"]) {
         BOOL retry = NO;
@@ -1038,6 +1065,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 - (void)client:(FYClient *)client receivedHandshakeMessage:(FYMessage *)message {
     if ([message.successful boolValue]) {
         self.clientId = message.clientId;
+        
+        // Choose connection type based on responded supportedConnectionTypes.
         NSMutableSet *commonSupportedConnectionTypes = [[NSMutableSet alloc] initWithArray:FYSupportedConnectionTypes()];
         [commonSupportedConnectionTypes intersectsSet:[[NSSet alloc] initWithArray:message.supportedConnectionTypes]];
         
@@ -1054,14 +1083,25 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             return;
         }
         
+        self.state = FYClientStateConnecting;
+        
         if ([commonSupportedConnectionTypes containsObject:FYConnectionTypes.WebSocket]) {
             self.connectionType = FYConnectionTypes.WebSocket;
             if (self.webSocket.readyState == SR_OPEN) {
-                [self sendConnect];
+                self.state = FYClientStateConnected;
+                
+                // Schedule the first keep-alive connect.
+                // DON'T send this immediately. This would cause (at least with Faye 0.8.9) an exceeding of the retry interval,
+                // which will cause a timeout/disconnet.
+                [self scheduleKeepAlive];
             }
         } else {
             NSAssert(@"The implementation of %@ does not handle all of the supported connection types "
                      "(FYSupportedConnectionTypes()=%@)!", NSStringFromSelector(_cmd), FYSupportedConnectionTypes());
+        }
+        
+        if (self.awaitOnlyHandshake) {
+            [self.delegateProxy clientConnected:self];
         }
     } else {
         // Handshake failed.
@@ -1076,8 +1116,17 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 - (void)client:(FYClient *)client receivedConnectMessage:(FYMessage *)message {
     if ([message.successful boolValue]) {
-        self.state = FYClientStateConnected;
-        [self.delegateProxy clientConnected:self];
+        FYLog(@"Received successful connect at: %.3f.", [NSDate.date timeIntervalSince1970]);
+        
+        if (self.state != FYClientStateConnected) {
+            // Initial connect.
+            if (!self.awaitOnlyHandshake) {
+                [self.delegateProxy clientConnected:self];
+            }
+        }
+        
+        // Schedule immediately the next keep-alive connect.
+        [self scheduleKeepAlive];
     } else {
         self.state = FYClientStateDisconnected;
         
