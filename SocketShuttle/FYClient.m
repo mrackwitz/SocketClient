@@ -556,14 +556,23 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 - (void)disconnect {
     self.reconnecting = NO;
     self.persist = nil;
-    [self sendDisconnect];
+    self.state = FYClientStateDisconnecting;
+    if (self.clientId) {
+        [self sendDisconnect];
+    } else if (self.state == FYClientStateHandshaking) {
+        [self chainActorForMetaChannel:FYMetaChannels.Handshake onceWithActorBlock:^(FYClient *self, FYMessage *message) {
+            if (self.connected && self.clientId) {
+                [self sendDisconnect];
+            }
+         }];
+    }
 }
 
 - (void)reconnect {
     // Save current channels
     NSMutableDictionary *channels = self.channels.mutableCopy;
     [self connectWithExtension:self.connectionExtension onSuccess:self.isReconnecting ? nil : ^(FYClient *self) {
-        if (self.state > FYClientStateConnecting) {
+        if (self.state >= FYClientStateConnecting) {
             // Re-subscript to channels on server-side
             self.channels = channels;
             for (NSString *channel in channels) {
@@ -746,17 +755,20 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
+    if (self.state == FYClientStateDisconnected) {
+        // Filter out expected disconnects
+        return;
+    }
     self.state = FYClientStateDisconnected;
     
     NSError *error;
-    if (!wasClean) {
+    if (reason || !wasClean) {
         error = [NSError errorWithDomain:FYErrorDomain code:FYErrorSocketClosed userInfo:@{
              NSLocalizedDescriptionKey:        @"The socket connection was closed.",
              NSLocalizedFailureReasonErrorKey: reason ?: @"Unknown",
          }];
-    } else {
-        FYLog(@"Clean exit");
     }
+    
     [self.delegateProxy client:self disconnectedWithMessage:nil error:error];
 }
 
@@ -1089,6 +1101,12 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     if ([message.successful boolValue]) {
         self.clientId = message.clientId;
         
+        if (self.state != FYClientStateHandshaking) {
+            FYLog(@"Don't handle successful handshake further, because client is not in state 'Handshaking' and didn't."
+                  "expected a handshake message or has disconnected while handshake was in progress.");
+            return;
+        }
+        
         // Choose connection type based on responded supportedConnectionTypes.
         NSMutableSet *commonSupportedConnectionTypes = [[NSMutableSet alloc] initWithArray:FYSupportedConnectionTypes()];
         [commonSupportedConnectionTypes intersectsSet:[[NSSet alloc] initWithArray:message.supportedConnectionTypes]];
@@ -1169,8 +1187,6 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         [self closeSocketConnection];
         [self.delegateProxy client:self disconnectedWithMessage:message error:nil];
     } else {
-        self.state = FYClientStateDisconnecting;
-        
         // Disconnection failed.
         NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorSubscribeFailed userInfo:@{
             NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Error on disconnecting from host %@",
