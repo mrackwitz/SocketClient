@@ -40,17 +40,11 @@ void uncaughtExceptionHandler(NSException* exception) {
         [client subscribeChannel:@"/count" callback:^(NSDictionary *userInfo){
             NSLog(@"Current number: %d", [userInfo[@"number"] intValue]);
             
-            /*// Increment
+            // Increment
             [self performSelector:@selector(publishCount:)
                        withObject:@([userInfo[@"number"] intValue] + 1)
-                       afterDelay:1];*/
+                       afterDelay:1];
          }];
-        
-        // Begin counting
-        [client publish:@{
-                @"sender": UIDevice.currentDevice.model,
-                @"number": @1
-            } onChannel:@"/count"];
      }];
     
     self.client = client;
@@ -59,6 +53,10 @@ void uncaughtExceptionHandler(NSException* exception) {
 }
 
 - (void)publishCount:(NSNumber *)number {
+    if (!self.client.connected) {
+        return;
+    }
+    
     [self.client publish:@{
         @"sender": UIDevice.currentDevice.model,
         @"number": number
@@ -71,6 +69,9 @@ void uncaughtExceptionHandler(NSException* exception) {
 
 - (void)client:(FYClient *)client subscriptionSucceedToChannel:(NSString *)channel {
     NSLog(@"Subscription succeed to channel: %@", channel);
+    
+    // Begin counting
+    [self publishCount:@1];
 }
 
 - (void)client:(FYClient *)client receivedUnexpectedMessage:(FYMessage *)message {
