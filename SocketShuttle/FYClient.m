@@ -169,7 +169,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 /**
  The proxied object.
  */
-@property (nonatomic, assign) id<NSObject,FYClientDelegate> proxiedObject;
+@property (nonatomic, weak) id<NSObject,FYClientDelegate> proxiedObject;
 
 @end
 

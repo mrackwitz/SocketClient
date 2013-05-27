@@ -149,7 +149,7 @@ typedef void(^FYMessageCallback)(NSDictionary *userInfo);
  Delegate to handle state transitions and errors, should be set direct after initialization of an <FYClient>
  object.
  */
-@property (nonatomic, assign) id<FYClientDelegate> delegate;
+@property (nonatomic, weak) id<FYClientDelegate> delegate;
 
 /**
  Dispatch queue on which delegate calls are executed.
