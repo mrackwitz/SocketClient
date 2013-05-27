@@ -375,6 +375,9 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     self.callbackQueue = nil;
     self.delegateQueue = nil;
     self.workerQueue   = nil;
+    
+    // Remove observations
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 - (id)initWithURL:(NSURL *)baseURL {
