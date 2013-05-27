@@ -525,6 +525,9 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             channel = FYMetaChannels.Handshake;
         }
         
+        // TODO: This is not sufficient if self.maySendHandshakeAsync=YES and socket will be opened after handshake
+        // succeeds.
+        
         // Swizzle actor:
         // This will even ensure that if the connect fails or a disconnect occurs before Bayeux connect was confirmed by
         // by the server the original success block will be called exactly once on success.
