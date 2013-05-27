@@ -744,6 +744,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             // Successful response to handshake was already received, but socket was not open, so we must schedule the
             // first connect here.
             [self scheduleKeepAlive];
+            
+            [self.delegateProxy clientConnected:self];
         }
     } else {
         [self handshake];
@@ -1141,7 +1143,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                      "(FYSupportedConnectionTypes()=%@)!", NSStringFromSelector(_cmd), FYSupportedConnectionTypes());
         }
         
-        if (self.awaitOnlyHandshake) {
+        if (self.state == FYClientStateConnected) {
             [self.delegateProxy clientConnected:self];
         }
     } else {
@@ -1159,7 +1161,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     if ([message.successful boolValue]) {
         FYLog(@"Received successful connect at: %.3f.", [NSDate.date timeIntervalSince1970]);
         
-        if (self.state != FYClientStateConnected) {
+        if (self.state != FYClientStateConnected) { // TODO This will never be true!
             // Initial connect.
             if (!self.awaitOnlyHandshake) {
                 [self.delegateProxy clientConnected:self];
