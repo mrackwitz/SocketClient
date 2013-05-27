@@ -529,9 +529,9 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         // This will even ensure that if the connect fails or a disconnect occurs before Bayeux connect was confirmed by
         // by the server the original success block will be called exactly once on success.
         [self chainActorForMetaChannel:channel onceWithActorBlock:^(FYClient *self, FYMessage *message) {
-            // First argument is named self, because it MUST be the same as the receiver in the outer scope, and we don't
-            // want to cause retain cycles by capturing self strongly in this block. Syntax hightlighting stays pretty
-            // and no additional `__weak` var is needed.
+            // First argument is named self, because it MUST be the same as the receiver in the outer scope, and we
+            // don't want to cause retain cycles by capturing self strongly in this block. Syntax hightlighting stays
+            // pretty and no additional `__weak` var is needed.
             
             // Execute success block
             dispatch_async(self.callbackQueue, ^{
@@ -1104,8 +1104,8 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         self.clientId = message.clientId;
         
         if (self.state != FYClientStateHandshaking) {
-            FYLog(@"Don't handle successful handshake further, because client is not in state 'Handshaking' and didn't."
-                  "expected a handshake message or has disconnected while handshake was in progress.");
+            FYLog(@"Don't handle successful handshake further, because client is not in state 'Handshaking' and didn't "
+                  " expected a handshake message or has disconnected while handshake was in progress.");
             return;
         }
         
