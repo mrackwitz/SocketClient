@@ -528,16 +528,25 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         // Swizzle actor:
         // This will even ensure that if the connect fails or a disconnect occurs before Bayeux connect was confirmed by
         // by the server the original success block will be called exactly once on success.
-        [self chainActorForMetaChannel:channel onceWithActorBlock:^(FYClient *self, FYMessage *message) {
+        __block __unsafe_unretained FYActorBlock recursiveActorBlock;
+        FYActorBlock actorBlock = ^(FYClient *self, FYMessage *message) {
             // First argument is named self, because it MUST be the same as the receiver in the outer scope, and we
             // don't want to cause retain cycles by capturing self strongly in this block. Syntax hightlighting stays
             // pretty and no additional `__weak` var is needed.
             
-            // Execute success block
-            dispatch_async(self.callbackQueue, ^{
-                block(self);
-             });
-         }];
+            if (self.connected) {
+                // Execute success block
+                dispatch_async(self.callbackQueue, ^{
+                    block(self);
+                 });
+            } else {
+                // Connect was not successful. Chain block again.
+                [self chainActorForMetaChannel:channel onceWithActorBlock:recursiveActorBlock];
+            }
+         };
+        recursiveActorBlock = actorBlock;
+        
+        [self chainActorForMetaChannel:channel onceWithActorBlock:actorBlock];
     }
     
     // Connect now
