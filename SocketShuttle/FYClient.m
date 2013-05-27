@@ -72,8 +72,8 @@ NSArray *FYSupportedConnectionTypes() {
 const NSUInteger FYClientStateSetIsConnecting = (1<<2);
 typedef NS_ENUM(NSUInteger, FYClientState) {
     FYClientStateDisconnected    = 0,
-    FYClientStateHandshaking     = FYClientStateSetIsConnecting | 1,
-    FYClientStateConnecting      = FYClientStateSetIsConnecting | 2,
+    FYClientStateHandshaking     = FYClientStateSetIsConnecting | (1<<0),
+    FYClientStateConnecting      = FYClientStateSetIsConnecting | (1<<1),
     FYClientStateConnected       = (1<<3),
     FYClientStateDisconnecting   = (1<<4),
 };
