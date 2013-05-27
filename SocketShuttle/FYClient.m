@@ -508,7 +508,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     [self connectWithExtension:nil];
 }
 
-- (void)connectOnSuccess:(void(^)(FYClient *))block; {
+- (void)connectOnSuccess:(FYClientConnectSuccessBlock)block; {
     [self connectWithExtension:nil onSuccess:block];
 }
 
@@ -516,7 +516,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     [self connectWithExtension:extension onSuccess:nil];
 }
 
-- (void)connectWithExtension:(NSDictionary *)extension onSuccess:(void(^)(FYClient *))block; {
+- (void)connectWithExtension:(NSDictionary *)extension onSuccess:(FYClientConnectSuccessBlock)block; {
     self.connectionExtension = extension;
     
     if (block) {

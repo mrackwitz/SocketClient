@@ -71,6 +71,11 @@ extern const NSTimeInterval FYClientRetryTimeInterval;
 extern const NSTimeInterval FYClientReconnectTimeInterval;
 
 /**
+ Callback for successful connection.
+ */
+typedef void(^FYClientConnectSuccessBlock)(FYClient *);
+
+/**
  Callback for user-defined channel subscriptions.
  */
 typedef void(^FYMessageCallback)(NSDictionary *userInfo);
@@ -320,7 +325,7 @@ typedef void(^FYMessageCallback)(NSDictionary *userInfo);
  @param block      Will be asynchronically called on success of operation. Receiver is given as argument to the block.
  Will be executed on callbackQueue.
  */
-- (void)connectOnSuccess:(void(^)(FYClient *))block;
+- (void)connectOnSuccess:(FYClientConnectSuccessBlock)block;
 
 /**
  Open a web socket connection and connect the receiver to its bound server with an extension object and a block which
@@ -334,7 +339,7 @@ typedef void(^FYMessageCallback)(NSDictionary *userInfo);
  @param block      Will be asynchronically called on success of operation. Receiver is given as argument to the block.
  Will be executed on callbackQueue.
  */
-- (void)connectWithExtension:(NSDictionary *)extension onSuccess:(void(^)(FYClient *))block;
+- (void)connectWithExtension:(NSDictionary *)extension onSuccess:(FYClientConnectSuccessBlock)block;
 
 /**
  Disconnect an instance from its bound server and closes its underlying web socket connection.
