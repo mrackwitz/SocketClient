@@ -192,9 +192,9 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 - (void)forwardInvocation:(NSInvocation*)invocation {
-    // Because there seems a delay when dispatching arguments async by using GCD arguments need to be retained manually
-    // so that they don't get released before the invocation was forwarded. This would cause an EXC_BAD_ACCESS(code=2).
-    // This could also occur if you are debugging with breakpoints...
+    // Because there seems a delay when dispatching invocations asynchronically by using GCD, the arguments need to be
+    // retained manually so that they don't get released before the invocation was forwarded. This would cause otherwise
+    // an EXC_BAD_ACCESS(code=2). This could also occur if you are debugging with breakpoints...
     [invocation retainArguments];
     
     FYLog(@"[%@] %@", self.class, NSStringFromSelector(invocation.selector));
