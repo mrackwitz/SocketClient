@@ -3,4 +3,4 @@
 	url = git@github.com:redpeppix-gmbh-co-kg/SocketRocket.git
 [submodule "pages"]
 	path = pages
-	url = git@github.com:mrackwitz/SocketShuttle.git
+	url = git@github.com:mrackwitz/SocketClient.git

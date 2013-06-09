@@ -1,3 +1,3 @@
-# SocketShuttle-SampleServers
+# SocketClient-SampleServers
 
-Sample servers for the SocketShuttle project.
+Sample servers for the SocketClient project.

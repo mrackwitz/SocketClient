@@ -1,7 +1,7 @@
 {
-	"name": "SocketShuttle-SampleServers",
+	"name": "SocketClient-SampleServers",
 	"author": "Marius Rackwitz <marius@paij.com>",
-	"description": "Sample servers for SocketShuttle.",
+	"description": "Sample servers for SocketClient.",
 	"version": "0.1.0",
 	"license": "MIT",
 	"private": 1,
@@ -10,7 +10,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/mrackwitz/SocketShuttle.git"
+		"url": "https://github.com/mrackwitz/SocketClient.git"
 	},
 	"keywords": ["example", "web-socket", "bayeux", "faye"],
 	"dependencies": {

@@ -3,7 +3,7 @@
 XCODE_BUILD_OPTS = -arch i386 VALID_ARCHS=i386 ARCH=i386 ONLY_ACTIVE_ARCH=NO
 
 XCODE_BUILD_WORKSPACE = xcodebuild \
-		-workspace SocketShuttle.xcworkspace \
+		-workspace SocketClient.xcworkspace \
 		-sdk iphonesimulator \
 		$(XCODE_BUILD_OPTS)
 
@@ -36,16 +36,16 @@ default: build-framework
 
 # Build the framework
 build-framework:
-	$(XCODE_BUILD_WORKSPACE) -scheme SocketShuttleFramework clean build
+	$(XCODE_BUILD_WORKSPACE) -scheme SocketClientFramework clean build
 
 # Execute tests
 test: run-server
-	$(XCODE_BUILD_WORKSPACE) -scheme SocketShuttleTests clean build
+	$(XCODE_BUILD_WORKSPACE) -scheme SocketClientTests clean build
 
 # Clean build
 clean:
-	$(XCODE_BUILD_WORKSPACE) -scheme SocketShuttleFramework clean
-	$(XCODE_BUILD_WORKSPACE) -scheme SocketShuttleTests clean
+	$(XCODE_BUILD_WORKSPACE) -scheme SocketClientFramework clean
+	$(XCODE_BUILD_WORKSPACE) -scheme SocketClientTests clean
 	rm -rf build
 
 

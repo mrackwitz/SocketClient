@@ -13,7 +13,7 @@ if [[ $? == 1 ]]; then
 fi
 
 appledoc \
- 	--project-name 'SocketShuttle' \
+ 	--project-name 'SocketClient' \
  	--project-version $(cat VERSION) \
 	--project-company 'redpixtec. GmbH' \
 	--company-id 'com.paij' \
@@ -26,10 +26,10 @@ appledoc \
 	--install-docset \
 	--publish-docset \
 	--index-desc README.md \
-	--docset-bundle-id com.paij.SocketShuttle \
-	--docset-bundle-name SocketShuttle \
-	--docset-feed-url 'http://mrackwitz.github.io/SocketShuttle/doc/com.paij.SocketShuttle.atom' \
-	--docset-package-url 'com.paij.SocketShuttle' \
+	--docset-bundle-id com.paij.SocketClient \
+	--docset-bundle-name SocketClient \
+	--docset-feed-url 'http://mrackwitz.github.io/SocketClient/doc/com.paij.SocketClient.atom' \
+	--docset-package-url 'com.paij.SocketClient' \
 	--docset-publisher-name paij  \
 	--docset-platform-family iOS \
 	--ignore build \
