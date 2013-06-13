@@ -18,7 +18,34 @@ SocketClient is a Bayeux client implementation on top of [SocketRocket](https://
 
 ## Installation instructions
 
-### Use as Submodule and target dependency
+### via CocoaPods
+
+The recommended approach for installing SocketClient is via the [CocoaPods](http://cocoapods.org/) package manager, as it provides flexible dependency management and dead simple installation.
+
+Install CocoaPods if not already available:
+
+``` bash
+$ [sudo] gem install cocoapods
+$ pod setup
+```
+
+Change to the directory of your Xcode project, and Create and Edit your Podfile and add SocketClient:
+
+``` bash
+$ cd /path/to/MyProject
+$ touch Podfile
+$ edit Podfile
+platform :ios, '5.0'
+pod 'SocketClient', '~> 0.1.0'
+
+Install into your project:
+
+``` bash
+$ pod install
+```
+
+
+### use as Submodule
 
 1. Execute ```git submodule add git@github.com:redpeppix-gmbh-co-kg/SocketClient.git vendor/SocketClient```.
 
@@ -56,6 +83,7 @@ See the provided example app and the [documentation](http://redpeppix-gmbh-co-kg
 
 * jverkoey's [iOS-Framework](https://github.com/jverkoey/iOS-Framework) licensed under <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a>.
 * Square's [SocketRocket](https://github.com/square/SocketRocket) licensed under [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+* Installation tutorial chapter "Via Cocoapods" was adapted from [RestKit](https://github.com/RestKit/RestKit).
 
 
 ## License
