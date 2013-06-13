@@ -197,7 +197,7 @@ A negative value will disable all reconnect tries when connection was lost.</Abs
 object.</Abstract>
 			<DeclaredIn>FYClient.h</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, assign) id&lt;FYClientDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;FYClientDelegate&gt; delegate</Declaration>
 			
 			
 			<Anchor>//api/name/delegate</Anchor>
@@ -209,7 +209,7 @@ object.</Abstract>
 object.</Abstract>
 			<DeclaredIn>FYClient.h</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, assign) id&lt;FYClientDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;FYClientDelegate&gt; delegate</Declaration>
 			
 			
 			<Anchor>//api/name/delegate</Anchor>
@@ -364,7 +364,7 @@ If argument is &apos;nil&apos;, then this method will do the same as [FYClient c
 is executed on success.</Abstract>
 			<DeclaredIn>FYClient.h</DeclaredIn>			
 			
-			<Declaration>- (void)connectOnSuccess:(void ( ^ ) ( FYClient *))block</Declaration>
+			<Declaration>- (void)connectOnSuccess:(FYClientConnectSuccessBlock)block</Declaration>
 			<Parameters>
 				<Parameter>
 					<Name>block</Name>
@@ -382,7 +382,7 @@ Will be executed on callbackQueue.</Abstract>
 is executed on success.</Abstract>
 			<DeclaredIn>FYClient.h</DeclaredIn>			
 			
-			<Declaration>- (void)connectWithExtension:(NSDictionary *)extension onSuccess:(void ( ^ ) ( FYClient *))block</Declaration>
+			<Declaration>- (void)connectWithExtension:(NSDictionary *)extension onSuccess:(FYClientConnectSuccessBlock)block</Declaration>
 			<Parameters>
 				<Parameter>
 					<Name>extension</Name>

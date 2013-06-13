@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.paij.SocketShuttle</string>
+	<string>com.paij.SocketClient</string>
 	<key>CFBundleName</key>
-	<string>SocketShuttle</string>
+	<string>SocketClient</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.1.0</string>
 	<key>CFBundleVersion</key>
@@ -17,9 +17,9 @@
 	
 	
 	<key>DocSetFeedName</key>
-	<string>SocketShuttle Documentation</string>
+	<string>SocketClient Documentation</string>
 	<key>DocSetFeedURL</key>
-	<string>http://mrackwitz.github.io/SocketShuttle/doc/com.paij.SocketShuttle.atom</string>
+	<string>http://redpeppix-gmbh-co-kg.github.io/SocketClient/doc/com.paij.SocketClient.atom</string>
 	<key>DocSetMinimumXcodeVersion</key>
 	<string>3.0</string>
 	<key>DocSetPlatformFamily</key>

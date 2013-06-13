@@ -38,7 +38,7 @@
 			<Abstract type="html">The proxied object.</Abstract>
 			<DeclaredIn>FYClient.m</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, assign) id&lt;NSObject,FYClientDelegate&gt; proxiedObject</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;NSObject,FYClientDelegate&gt; proxiedObject</Declaration>
 			
 			
 			<Anchor>//api/name/proxiedObject</Anchor>
@@ -49,7 +49,7 @@
 			<Abstract type="html">The proxied object.</Abstract>
 			<DeclaredIn>FYClient.m</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, assign) id&lt;NSObject,FYClientDelegate&gt; proxiedObject</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;NSObject,FYClientDelegate&gt; proxiedObject</Declaration>
 			
 			
 			<Anchor>//api/name/proxiedObject</Anchor>
