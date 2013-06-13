@@ -82,7 +82,6 @@ publish-doc: build-doc
 	cd pages; \
 	git checkout -B gh-pages; \
 	cp -R ../build/doc .; \
-	cp -R ../build/products .; \
 	git add -A; \
 	git commit -m "Updated doc"; \
 	git push origin gh-pages; \
