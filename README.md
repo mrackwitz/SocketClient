@@ -37,6 +37,7 @@ $ touch Podfile
 $ edit Podfile
 platform :ios, '5.0'
 pod 'SocketClient', '~> 0.1.0'
+```
 
 Install into your project:
 
