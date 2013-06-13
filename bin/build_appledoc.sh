@@ -28,7 +28,7 @@ appledoc \
 	--index-desc README.md \
 	--docset-bundle-id com.paij.SocketClient \
 	--docset-bundle-name SocketClient \
-	--docset-feed-url 'http://mrackwitz.github.io/SocketClient/doc/com.paij.SocketClient.atom' \
+	--docset-feed-url 'http://redpeppix-gmbh-co-kg.github.io/SocketClient/doc/com.paij.SocketClient.atom' \
 	--docset-package-url 'com.paij.SocketClient' \
 	--docset-publisher-name paij  \
 	--docset-platform-family iOS \

@@ -20,36 +20,36 @@ SocketClient is a Bayeux client implementation on top of [SocketRocket](https://
 
 ### Use as Submodule and target dependency
 
-1. Execute ```git submodule add git@github.com:mrackwitz/SocketClient.git vendor/SocketClient```.
+1. Execute ```git submodule add git@github.com:redpeppix-gmbh-co-kg/SocketClient.git vendor/SocketClient```.
 
 2. ```open vendor/SocketClient```
 
 3. Drop **SocketClient.xcodeproj** in your project navigator.
 
-    ![Step 3](http://mrackwitz.github.io/SocketClient/images/step_3.png)
+    ![Step 3](http://redpeppix-gmbh-co-kg.github.io/SocketClient/images/step_3.png)
 
-4. Add ![Target SocketClient](http://mrackwitz.github.io/SocketClient/images/target.png).
+4. Add ![Target SocketClient](http://redpeppix-gmbh-co-kg.github.io/SocketClient/images/target.png).
 
-    ![Step 4](http://mrackwitz.github.io/SocketClient/images/step_4.png)
+    ![Step 4](http://redpeppix-gmbh-co-kg.github.io/SocketClient/images/step_4.png)
 
 5. Add library **libSocketClient.a** to your project.
 
-    ![Step 5](http://mrackwitz.github.io/SocketClient/images/step_5.png)
+    ![Step 5](http://redpeppix-gmbh-co-kg.github.io/SocketClient/images/step_5.png)
 
 6. Add library **libicucore.dylib** to your project.
 
-    ![Step 6](http://mrackwitz.github.io/SocketClient/images/step_6.png)
+    ![Step 6](http://redpeppix-gmbh-co-kg.github.io/SocketClient/images/step_6.png)
 
 7. (Ensure that library was placed in group **Frameworks**.)
 
-    ![Step 7](http://mrackwitz.github.io/SocketClient/images/step_7.png)
+    ![Step 7](http://redpeppix-gmbh-co-kg.github.io/SocketClient/images/step_7.png)
 
 8. ```import <SocketClient/SocketClient.h>``` where ever you want to use the library. You could add it to your header prefix file, if you want.
 
 
 ## Usage
 
-See the provided example app and the [documentation](http://mrackwitz.github.io/SocketClient/doc/html/index.html) for more information.
+See the provided example app and the [documentation](http://redpeppix-gmbh-co-kg.github.io/SocketClient/doc/html/index.html) for more information.
 
 
 ## Credits
