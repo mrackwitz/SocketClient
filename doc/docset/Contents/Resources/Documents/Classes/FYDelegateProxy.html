@@ -122,7 +122,7 @@
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p>An instance of FYDelegateProxy is used internally in FYClient to dispatch calls to its <a href="../Classes/FYClient.html#//api/name/delegate">delegate</a>.</p>
 
-<p>A <code>NSProxy</code> subclass <code>FYDelegateProxy</code> is used in <a href="../Classes/FYClient.html"><code>FYClient</code></a> as property <a href="../Classes/FYClient.html#//api/name/delegateProxy">delegateProxy</a> to
+<p>A <code>NSProxy</code> subclass <code>FYDelegateProxy</code> is used in <a href="../Classes/FYClient.html"><code>FYClient</code></a> as property [FYClient delegateProxy] to
 dispatch calls to the delegate property. This is used to don&rsquo;t have to think about non-implemented optional protocol
 methods. All declared selectors could be invoked and are forwared to the real delegate implementation stored in
 <a href="#//api/name/proxiedObject"><code>proxiedObject</code></a> property of <code>FYDelegateProxy</code>. So the getter and setter implementation of the property <code>delegate</code> of
