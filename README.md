@@ -1,6 +1,12 @@
 # SocketClient
 
-SocketClient is a Bayeux client implementation on top of [SocketRocket](https://github.com/square/SocketRocket), which is used as transport layer.
+Simple, fast & reliable Faye Websocket client. Well documented higher-level API build on [SocketRocket](https://github.com/square/SocketRocket), which is used as transport layer.
+Supports messaging on different channels.
+
+* *Simple*: You don't have to care about messaging on different channels for yourself and can rely for the server-side part on Faye. Automatically JSON serialization and deserialization with Foundation's ```NSJSONSerialization```. 
+* *Fast*: It uses Websockets! Furthermore it use GCD intensively and tries to never block the main queue.
+* *Reliable* connection: It automatically tries to reconnect, if the connection was interrupted. It uses SystemConfiguration's reachability events to observe connection state. Furthermore it observes UIKit's application active state notifications to disconnect when going in background and reconnect when becoming active.
+* *Well documented*: You can install and open Appledoc documentation by executing ```make doc```.
 
 
 ## TODO

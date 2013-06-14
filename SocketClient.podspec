@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name                  = "SocketClient"
   s.version               = '0.1.0'
-  s.summary               = 'A Bayeux client implementation on top of SocketRocket.'
+  s.summary               = 'Simple, fast & reliable Faye Websocket client. Well documented API build on SocketRocket. Supports messaging on different channels.'
   s.homepage              = 'https://github.com/redpeppix-gmbh-co-kg/SocketClient'
-  s.authors               = 'Marius Rackwitz, redpixtec. GmbH'
+  s.author                = { 'Marius Rackwitz' => 'marius@paij.com' }
   s.license               = 'MIT License'
   s.source                = { :git => 'https://github.com/redpeppix-gmbh-co-kg/SocketClient.git', :tag => '0.1.0' }
   s.source_files          = 'SocketClient/*.{h,m,c}'
