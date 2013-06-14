@@ -1,0 +1,15 @@
+PODS:
+  - SocketRocket (0.3.3)
+
+DEPENDENCIES:
+  - SocketRocket (from `https://github.com/redpeppix-gmbh-co-kg/SocketRocket.git`, commit `e92fe2e63a`)
+
+EXTERNAL SOURCES:
+  SocketRocket:
+    :commit: e92fe2e63a
+    :git: https://github.com/redpeppix-gmbh-co-kg/SocketRocket.git
+
+SPEC CHECKSUMS:
+  SocketRocket: 94452d6479dda699c33cba89cac121b2ea924ba0
+
+COCOAPODS: 0.20.2
