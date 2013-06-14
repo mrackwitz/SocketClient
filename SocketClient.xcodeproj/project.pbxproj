@@ -308,6 +308,7 @@
 				71AC710E1741349A004B2B72 /* Frameworks */,
 				714B29E11741715D00D03362 /* Headers */,
 				71AC7167174136A5004B2B72 /* Build Documentation */,
+				714CCFC4176B730B001D3F1B /* Show TODOs and FIXMEs as Warnings in Xcode */,
 				714B29D917416C3E00D03362 /* Prepare Framework */,
 			);
 			buildRules = (
@@ -443,6 +444,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = bin/build_framework.sh;
+		};
+		714CCFC4176B730B001D3F1B /* Show TODOs and FIXMEs as Warnings in Xcode */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Show TODOs and FIXMEs as Warnings in Xcode";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Show TODOs and FIXMEs as warnings in Xcode\n# link: http://deallocatedobjects.com/posts/show-todos-and-fixmes-as-warnings-in-xcode-4\nKEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\n#find \"${SRCROOT}/${PRODUCT_NAME}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"";
 		};
 		71AC71201741349A004B2B72 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
