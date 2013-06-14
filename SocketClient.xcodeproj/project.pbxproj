@@ -469,7 +469,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = bin/build_appledoc.sh;
+			shellScript = "#bin/build_appledoc.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
