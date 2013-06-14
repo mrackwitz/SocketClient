@@ -816,7 +816,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                 @"Accept-Encoding": @"gzip",
                 @"Content-Type":    @"application/json",
              };
-            // TODO Add here a delegate method to further initialize requests header fields for authorization
+            // TODO: Add here a delegate method to further initialize requests header fields for authorization
             // with inout &headers
             for (NSString *headerField in headers) {
                 [request addValue:headers[headerField] forHTTPHeaderField:headerField];
@@ -1176,7 +1176,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     if ([message.successful boolValue]) {
         FYLog(@"Received successful connect at: %.3f.", [NSDate.date timeIntervalSince1970]);
         
-        if (self.state != FYClientStateConnected) { // TODO This will never be true!
+        if (self.state != FYClientStateConnected) { // TODO: This will never be true!
             // Initial connect.
             if (!self.awaitOnlyHandshake) {
                 [self.delegateProxy clientConnected:self];
