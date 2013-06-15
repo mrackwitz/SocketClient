@@ -30,6 +30,8 @@
 		714B29E71741718600D03362 /* SocketClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 71AC713C174134C8004B2B72 /* SocketClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		714B29EE1741746900D03362 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 714B29ED1741746900D03362 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		714B2A281743BEBD00D03362 /* SocketClient_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 714B2A261743B06900D03362 /* SocketClient_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		714CCFFD176C9179001D3F1B /* FYDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 714CCFFB176C9179001D3F1B /* FYDelegateProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		714CCFFE176C9179001D3F1B /* FYDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 714CCFFC176C9179001D3F1B /* FYDelegateProxy.m */; };
 		71AC71151741349A004B2B72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC71141741349A004B2B72 /* Foundation.framework */; };
 		71AC71241741349A004B2B72 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC71231741349A004B2B72 /* SenTestingKit.framework */; };
 		71AC71261741349A004B2B72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC71251741349A004B2B72 /* UIKit.framework */; };
@@ -108,6 +110,8 @@
 /* Begin PBXFileReference section */
 		714B29ED1741746900D03362 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
 		714B2A261743B06900D03362 /* SocketClient_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SocketClient_Private.h; sourceTree = "<group>"; };
+		714CCFFB176C9179001D3F1B /* FYDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYDelegateProxy.h; sourceTree = "<group>"; };
+		714CCFFC176C9179001D3F1B /* FYDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYDelegateProxy.m; sourceTree = "<group>"; };
 		71AC71111741349A004B2B72 /* libSocketClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSocketClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		71AC71141741349A004B2B72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		71AC71221741349A004B2B72 /* SocketClientTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocketClientTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,6 +224,8 @@
 				71AC713F17413554004B2B72 /* FYClient.h */,
 				71AC714017413554004B2B72 /* FYClient.m */,
 				71AC714117413554004B2B72 /* FYClientDelegate.h */,
+				714CCFFB176C9179001D3F1B /* FYDelegateProxy.h */,
+				714CCFFC176C9179001D3F1B /* FYDelegateProxy.m */,
 				71AC714217413554004B2B72 /* FYError.h */,
 				71AC714317413554004B2B72 /* FYError.m */,
 				71AC714417413554004B2B72 /* FYMessage.h */,
@@ -288,6 +294,7 @@
 			files = (
 				714B29E21741717400D03362 /* FYClient.h in Headers */,
 				714B29E41741717F00D03362 /* FYClientDelegate.h in Headers */,
+				714CCFFD176C9179001D3F1B /* FYDelegateProxy.h in Headers */,
 				714B29E51741718100D03362 /* FYError.h in Headers */,
 				714B29E61741718300D03362 /* FYMessage.h in Headers */,
 				714B29E71741718600D03362 /* SocketClient.h in Headers */,
@@ -497,6 +504,7 @@
 				71AC714717413554004B2B72 /* FYClient.m in Sources */,
 				71AC714817413554004B2B72 /* FYError.m in Sources */,
 				71AC714917413554004B2B72 /* FYMessage.m in Sources */,
+				714CCFFE176C9179001D3F1B /* FYDelegateProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

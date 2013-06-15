@@ -34,6 +34,7 @@
 #import <UIKit/UIKit.h>
 #import "FYClient.h"
 #import "FYActor.h"
+#import "FYDelegateProxy.h"
 #import "SocketClient_Private.h"
 
 
@@ -131,97 +132,6 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 
 /**
- An instance of FYDelegateProxy is used internally in FYClient to dispatch calls to its [delegate]([FYClient delegate]).
- 
- A `NSProxy` subclass `FYDelegateProxy` is used in `FYClient` as property [delegateProxy]([FYClient delegateProxy]) to
- dispatch calls to the delegate property. This is used to don't have to think about non-implemented optional protocol
- methods. All declared selectors could be invoked and are forwared to the real delegate implementation stored in
- `proxiedObject` property of `FYDelegateProxy`. So the getter and setter implementation of the property `delegate` of
- `FYClient` have to return / mutate ```self.clientDelegateProxy.proxiedObject```.
- 
- So instead of writing a lot of repeative code like:
- 
-    if ([self.delegate respondsToSelector:@selector(client:didFoo:)]) {
-        [self.delegate client:self didFoo:foo];
-    }
- 
- You can simply write your code like:
- 
-    [self.clientDelegateProxy client:self didFoo:foo];
- 
- This won't raise any "selector not found" exception, if this selector is optional and not implemented.
- */
-@interface FYDelegateProxy : NSProxy
-
-/**
- Dispatch queue on which delegate calls are executed.
- */
-@property (nonatomic) dispatch_queue_t delegateQueue;
-
-/**
- The proxied object.
- */
-@property (nonatomic, weak) id<NSObject> proxiedObject;
-
-@end
-
-
-@implementation FYDelegateProxy
-
-- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector {
-	NSMethodSignature *signature = [_proxiedObject.class instanceMethodSignatureForSelector:selector];
-	if (!signature) {
-        // methodSignatureForSelector: is called when a compiled definition for the selector cannot be found.
-        // If this method returns nil, a "selector not found" exception is raised.
-        // The string argument to signatureWithObjCTypes: outlines the return type and arguments to the message.
-        // To return a dud `NSMethodSignature`, pretty much any signature will suffice. Since the forwardInvocation:
-        // call will do nothing if the delegate does not respond to the selector, the dud `NSMethodSignature` simply
-        // gets us around the exception.
-        // @see http://borkware.com/rants/agentm/elegant-delegation/
-		signature = [NSMethodSignature signatureWithObjCTypes:"@^v^c"];
-	}
-	return signature;
-}
-
-- (void)forwardInvocation:(NSInvocation*)invocation {
-    // Because there seems a delay when dispatching invocations asynchronically by using GCD, the arguments need to be
-    // retained manually so that they don't get released before the invocation was forwarded. This would cause otherwise
-    // an EXC_BAD_ACCESS(code=2). This could also occur if you are debugging with breakpoints...
-    [invocation retainArguments];
-    
-    FYLog(@"[%@] %@", self.class, NSStringFromSelector(invocation.selector));
-    
-    if ([_proxiedObject respondsToSelector:invocation.selector]) {
-        dispatch_async(_delegateQueue, ^{
-            [invocation invokeWithTarget:self.proxiedObject];
-         });
-    }
-}
-
-- (void)setDelegateQueue:(dispatch_queue_t)delegateQueue {
-    if (delegateQueue) {
-        fy_dispatch_retain(delegateQueue);
-    }
-    if (_delegateQueue) {
-        fy_dispatch_release(_delegateQueue);
-    }
-    _delegateQueue = delegateQueue;
-}
-
-@end
-
-
-@interface FYClientDelegateProxy : FYDelegateProxy<FYClientDelegate>
-@property (nonatomic, weak) id<NSObject,FYClientDelegate> proxiedObject;
-@end
-
-@interface FYWebSocketDelegateProxy : FYDelegateProxy<SRWebSocketDelegate>
-@property (nonatomic, weak) id<NSObject,SRWebSocketDelegate> proxiedObject;
-@end
-
-
-
-/**
  Internal category for 'FYClient' to replace host name with arguments from `hosts` advice, to fulfill this advice on
  connection problems.
  */
@@ -273,6 +183,11 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 
 
+FYDefineDelegateProxy(FYClientDelegate);
+FYDefineDelegateProxy(SRWebSocketDelegate);
+
+
+
 /*
  Private interface
  */
@@ -299,7 +214,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 @property (nonatomic, retain, readwrite) NSMutableDictionary *channels;
 
 @property (nonatomic, retain) FYClientDelegateProxy *clientDelegateProxy;
-@property (nonatomic, retain) FYWebSocketDelegateProxy *webSocketDelegateProxy;
+@property (nonatomic, retain) SRWebSocketDelegateProxy *webSocketDelegateProxy;
 @property (nonatomic) dispatch_queue_t workerQueue;
 
 // TODO: Enumerate hosts
@@ -726,7 +641,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     if ([self.webSocket respondsToSelector:@selector(setDelegateDispatchQueue:)]) {
         [self.webSocket performSelector:@selector(setDelegateDispatchQueue:) withObject:(id)self.workerQueue];
     } else {
-        self.webSocketDelegateProxy = [FYWebSocketDelegateProxy alloc];
+        self.webSocketDelegateProxy = [SRWebSocketDelegateProxy alloc];
         self.webSocketDelegateProxy.delegateQueue = self.workerQueue;
         self.webSocketDelegateProxy.proxiedObject = self;
         self.webSocket.delegate = self.webSocketDelegateProxy;
