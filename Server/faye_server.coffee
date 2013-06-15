@@ -32,7 +32,7 @@ bayeux.getClient().subscribe '/count', (message) ->
     console.log '{ sender: %s, number: %d }',
       message.sender, message.number
     
-    if (message.sender is not 'server')
+    if (message.sender isnt 'server')
         message.sender = 'server'
         bayeux.getClient().publish '/count',
              sender: 'server',

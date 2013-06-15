@@ -41,9 +41,11 @@ void uncaughtExceptionHandler(NSException* exception) {
             NSLog(@"Current number: %d", [userInfo[@"number"] intValue]);
             
             // Increment
-            [self performSelector:@selector(publishCount:)
-                       withObject:@([userInfo[@"number"] intValue] + 1)
-                       afterDelay:1];
+            if (![userInfo[@"sender"] isEqual:UIDevice.currentDevice.model]) {
+                [self performSelector:@selector(publishCount:)
+                           withObject:@([userInfo[@"number"] intValue] + 1)
+                           afterDelay:1];
+            }
          }];
      }];
     
