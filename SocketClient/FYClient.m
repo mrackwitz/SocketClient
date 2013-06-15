@@ -145,7 +145,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
  dispatch calls to the delegate property. This is used to don't have to think about non-implemented optional protocol
  methods. All declared selectors could be invoked and are forwared to the real delegate implementation stored in
  `proxiedObject` property of `FYDelegateProxy`. So the getter and setter implementation of the property `delegate` of
- `FYClient` have to return / mutate ```self.delegateProxy.proxiedObject```.
+ `FYClient` have to return / mutate ```self.clientDelegateProxy.proxiedObject```.
  
  So instead of writing a lot of repeative code like:
  
@@ -155,11 +155,11 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
  
  You can simply write your code like:
  
-    [self.delegateProxy client:self didFoo:foo];
+    [self.clientDelegateProxy client:self didFoo:foo];
  
  This won't raise any "selector not found" exception, if this selector is optional and not implemented.
  */
-@interface FYDelegateProxy : NSProxy<FYClientDelegate>
+@interface FYDelegateProxy : NSProxy
 
 /**
  Dispatch queue on which delegate calls are executed.
@@ -169,7 +169,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 /**
  The proxied object.
  */
-@property (nonatomic, weak) id<NSObject,FYClientDelegate> proxiedObject;
+@property (nonatomic, weak) id<NSObject> proxiedObject;
 
 @end
 
@@ -217,6 +217,12 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 @end
+
+
+@interface FYClientDelegateProxy : FYDelegateProxy<FYClientDelegate>
+@property (nonatomic, weak) id<NSObject,FYClientDelegate> proxiedObject;
+@end
+
 
 
 /**
@@ -296,7 +302,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 @property (nonatomic, retain) NSDictionary *connectionExtension;
 @property (nonatomic, retain, readwrite) NSMutableDictionary *channels;
 
-@property (nonatomic, retain) FYDelegateProxy *delegateProxy;
+@property (nonatomic, retain) FYClientDelegateProxy *clientDelegateProxy;
 @property (nonatomic) dispatch_queue_t workerQueue;
 
 // TODO: Enumerate hosts
@@ -396,7 +402,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             : [baseURL URLWithScheme:[scheme isEqualToString:@"wss"] ? @"https" : @"http" host:baseURL.host];
         
         // This must be done before delegateQueue was set.
-        self.delegateProxy = [FYDelegateProxy alloc]; // yes - there is no init ;)
+        self.clientDelegateProxy = [FYClientDelegateProxy alloc]; // yes - there is no init ;)
         
         // Init worker queue
         NSString *workerQueueName = [FYWorkerQueueName stringByAppendingFormat:@"_%d", (int)self];
@@ -449,20 +455,20 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 #pragma mark - Custom delegate getter and setter forwards to delegateProxy
 
 - (void)setDelegate:(id<FYClientDelegate>)delegate {
-    self.delegateProxy.proxiedObject = delegate;
+    self.clientDelegateProxy.proxiedObject = delegate;
 }
 
 - (id<FYClientDelegate>)delegate {
-    return self.delegateProxy.proxiedObject;
+    return self.clientDelegateProxy.proxiedObject;
 }
 
 - (void)setDelegateQueue:(dispatch_queue_t)delegateQueue {
-    NSAssert(self.delegateProxy, @"Delegate proxy has to be initialized before delegateQueue can be set.");
-    self.delegateProxy.delegateQueue = delegateQueue;
+    NSAssert(self.clientDelegateProxy, @"Delegate proxy has to be initialized before delegateQueue can be set.");
+    self.clientDelegateProxy.delegateQueue = delegateQueue;
 }
 
 - (dispatch_queue_t)delegateQueue {
-    return self.delegateProxy.delegateQueue;
+    return self.clientDelegateProxy.delegateQueue;
 }
 
 
@@ -741,7 +747,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                      NSLocalizedDescriptionKey:        @"The socket connection is not open, but required to be opened.",
                      NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Could not send message %@", message],
                  }];
-                [self.delegateProxy client:self failedWithError:error];
+                [self.clientDelegateProxy client:self failedWithError:error];
             }
         }
      });
@@ -760,7 +766,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             // first connect here.
             [self scheduleKeepAlive];
             
-            [self.delegateProxy clientConnected:self];
+            [self.clientDelegateProxy clientConnected:self];
         }
     } else {
         [self handshake];
@@ -786,14 +792,14 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
          }];
     }
     
-    [self.delegateProxy client:self disconnectedWithMessage:nil error:error];
+    [self.clientDelegateProxy client:self disconnectedWithMessage:nil error:error];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
     if ([error.domain isEqualToString:NSPOSIXErrorDomain]) {
         [self handlePOSIXError:error];
     }
-    [self.delegateProxy client:self failedWithError:error];
+    [self.clientDelegateProxy client:self failedWithError:error];
 }
 
 
@@ -855,7 +861,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                 NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Received unexpected response with "
                                                    "status code %d with content: %@.", response.statusCode, message]
              }];
-            [self.delegateProxy client:self failedWithError:error];
+            [self.clientDelegateProxy client:self failedWithError:error];
         } else {
             [self handleResponse:message];
         }
@@ -863,7 +869,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [self.delegateProxy client:self failedWithError:error];
+    [self.clientDelegateProxy client:self failedWithError:error];
 }
 
 
@@ -1010,7 +1016,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
             NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Expected an array of messages, but got: %@.",
                                                result],
          }];
-        [self.delegateProxy client:self failedWithError:error];
+        [self.clientDelegateProxy client:self failedWithError:error];
         return;
     }
     
@@ -1049,7 +1055,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                     NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Unhandled meta channel message on "
                                                        "channel '%@'.", message.channel],
                  }];
-                [self.delegateProxy client:self failedWithError:error];
+                [self.clientDelegateProxy client:self failedWithError:error];
             } else if (self.channels[message.channel]) {
                 // User-defined channel
                 if (message.data) {
@@ -1060,7 +1066,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                 }
             } else {
                 // Unexpected channel
-                [self.delegateProxy client:self receivedUnexpectedMessage:message];
+                [self.clientDelegateProxy client:self receivedUnexpectedMessage:message];
             }
         }
     }
@@ -1085,7 +1091,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         }
         
         // Let delegate implementation customize given delay
-        [self.delegateProxy clientWasAdvisedToRetry:self retryInterval:&delay];
+        [self.clientDelegateProxy clientWasAdvisedToRetry:self retryInterval:&delay];
         
         if (delay == 0) {
             self.retryTimeInterval = FYClientRetryTimeInterval;
@@ -1094,7 +1100,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         }
     } else if ([reconnectAdvice isEqualToString:@"handshake"]) {
         BOOL retry = NO;
-        [self.delegateProxy clientWasAdvisedToHandshake:self shouldRetry:&retry];
+        [self.clientDelegateProxy clientWasAdvisedToHandshake:self shouldRetry:&retry];
         if (retry) {
             [self handshake];
         }
@@ -1106,7 +1112,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                 NSLocalizedDescriptionKey:        [NSString stringWithFormat:@"Received reconnect advice 'none'."],
                 NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
              }];
-            [self.delegateProxy client:self disconnectedWithMessage:message error:error];
+            [self.clientDelegateProxy client:self disconnectedWithMessage:message error:error];
         }
     }
 }
@@ -1137,7 +1143,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                    "Server supports the following: %@. Required was one of: %@.",
                                                    message.supportedConnectionTypes, FYSupportedConnectionTypes()]
              }];
-            [self.delegateProxy client:self disconnectedWithMessage:message error:error];
+            [self.clientDelegateProxy client:self disconnectedWithMessage:message error:error];
             return;
         }
         
@@ -1159,7 +1165,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         }
         
         if (self.state == FYClientStateConnected) {
-            [self.delegateProxy clientConnected:self];
+            [self.clientDelegateProxy clientConnected:self];
         }
     } else {
         // Handshake failed.
@@ -1168,7 +1174,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                self.baseURL.absoluteString],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
-        [self.delegateProxy client:self failedWithError:error];
+        [self.clientDelegateProxy client:self failedWithError:error];
     }
 }
 
@@ -1179,7 +1185,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         if (self.state != FYClientStateConnected) { // TODO: This will never be true!
             // Initial connect.
             if (!self.awaitOnlyHandshake) {
-                [self.delegateProxy clientConnected:self];
+                [self.clientDelegateProxy clientConnected:self];
             }
         }
         
@@ -1194,7 +1200,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                "but Bayeux connection failed on host %@.", self.baseURL.absoluteString],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
-        [self.delegateProxy client:self disconnectedWithMessage:message error:error];
+        [self.clientDelegateProxy client:self disconnectedWithMessage:message error:error];
     }
 }
 
@@ -1202,7 +1208,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     if ([message.successful boolValue]) {
         self.state = FYClientStateDisconnected;
         [self closeSocketConnection];
-        [self.delegateProxy client:self disconnectedWithMessage:message error:nil];
+        [self.clientDelegateProxy client:self disconnectedWithMessage:message error:nil];
     } else {
         // Disconnection failed.
         NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorSubscribeFailed userInfo:@{
@@ -1210,13 +1216,13 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                self.baseURL.absoluteString],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
-        [self.delegateProxy client:self failedWithError:error];
+        [self.clientDelegateProxy client:self failedWithError:error];
     }
 }
 
 - (void)client:(FYClient *)client receivedSubscribeMessage:(FYMessage *)message {
     if ([message.successful boolValue]) {
-        [self.delegateProxy client:self subscriptionSucceedToChannel:message.subscription];
+        [self.clientDelegateProxy client:self subscriptionSucceedToChannel:message.subscription];
     } else {
         // Subscription failed.
         NSError *error = [NSError errorWithDomain:FYErrorDomain code:FYErrorSubscribeFailed userInfo:@{
@@ -1224,7 +1230,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                message.subscription],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
-        [self.delegateProxy client:self failedWithError:error];
+        [self.clientDelegateProxy client:self failedWithError:error];
     }
 }
 
@@ -1238,7 +1244,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                message.subscription],
             NSLocalizedFailureReasonErrorKey: message.error ?: @"Unknown",
          }];
-        [self.delegateProxy client:self failedWithError:error];
+        [self.clientDelegateProxy client:self failedWithError:error];
     }
 }
 
@@ -1262,7 +1268,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
              NSLocalizedDescriptionKey: @"Can't serialize malformed data.",
              NSUnderlyingErrorKey:      error,
          }];
-        [self.delegateProxy client:self failedWithError:fyError];
+        [self.clientDelegateProxy client:self failedWithError:fyError];
         return nil;
     }
     return data;
@@ -1282,7 +1288,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
              NSLocalizedDescriptionKey: @"JSON data is malformed.",
              NSUnderlyingErrorKey:      error,
          }];
-        [self.delegateProxy client:self failedWithError:fyError];
+        [self.clientDelegateProxy client:self failedWithError:fyError];
         return nil;
     } else {
         return result;
