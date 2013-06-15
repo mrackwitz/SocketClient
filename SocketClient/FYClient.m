@@ -223,6 +223,10 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 @property (nonatomic, weak) id<NSObject,FYClientDelegate> proxiedObject;
 @end
 
+@interface FYWebSocketDelegateProxy : FYDelegateProxy<SRWebSocketDelegate>
+@property (nonatomic, weak) id<NSObject,SRWebSocketDelegate> proxiedObject;
+@end
+
 
 
 /**
@@ -303,6 +307,7 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 @property (nonatomic, retain, readwrite) NSMutableDictionary *channels;
 
 @property (nonatomic, retain) FYClientDelegateProxy *clientDelegateProxy;
+@property (nonatomic, retain) FYWebSocketDelegateProxy *webSocketDelegateProxy;
 @property (nonatomic) dispatch_queue_t workerQueue;
 
 // TODO: Enumerate hosts
@@ -724,9 +729,15 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     self.webSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:self.baseURL]];
     self.webSocket.delegate = self;
     
-    // Let's respond the socket on our workerQueue, we will dispatch one
-    // our delegate / callback queues for our own.
-    self.webSocket.delegateDispatchQueue = self.workerQueue;
+    // Let's respond the socket on our workerQueue, we will dispatch on our delegate / callback queues for our own.
+    if ([self.webSocket respondsToSelector:@selector(setDelegateDispatchQueue:)]) {
+        [self.webSocket performSelector:@selector(setDelegateDispatchQueue:) withObject:(id)self.workerQueue];
+    } else {
+        self.webSocketDelegateProxy = [FYWebSocketDelegateProxy alloc];
+        self.webSocketDelegateProxy.delegateQueue = self.workerQueue;
+        self.webSocketDelegateProxy.proxiedObject = self;
+        self.webSocket.delegate = self.webSocketDelegateProxy;
+    }
     
     [self.webSocket open];
 }
