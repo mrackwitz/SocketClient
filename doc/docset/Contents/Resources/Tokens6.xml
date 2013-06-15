@@ -1,100 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/FYSelTargetActor.html">
+	<File path="Classes/FYMessageCallbackWrapper.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/FYSelTargetActor</TokenIdentifier>
-			<Abstract type="html">Handle received message by a selector which is performed on a given target.</Abstract>
-			<DeclaredIn>FYActor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/FYMessageCallbackWrapper</TokenIdentifier>
+			<Abstract type="html">Blocks needs to be copied, when stored. Because you can use one single block as callback for multiple subscripted
+channels and we don&apos;t want to copy the block for each channel, use a wrapper object, which copy the block once and
+which will be released first, if all references, which are held each by a channel, were released by unsubscripting
+all these channels.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>
 			
 			<NodeRef refid="6"/>
 		</Token>
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYSelTargetActor/setTarget:</TokenIdentifier>
-			<Abstract type="html">The target on which the selector will be performed.</Abstract>
-			<DeclaredIn>FYActor.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/instm/FYMessageCallbackWrapper/setCallback:</TokenIdentifier>
+			<Abstract type="html">Wrapper block callback.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, weak) id&lt;NSObject&gt; target</Declaration>
+			<Declaration>@property (nonatomic, copy) FYMessageCallback callback</Declaration>
 			
 			
-			<Anchor>//api/name/target</Anchor>
+			<Anchor>//api/name/callback</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYSelTargetActor/target</TokenIdentifier>
-			<Abstract type="html">The target on which the selector will be performed.</Abstract>
-			<DeclaredIn>FYActor.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/instp/FYMessageCallbackWrapper/callback</TokenIdentifier>
+			<Abstract type="html">Wrapper block callback.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, weak) id&lt;NSObject&gt; target</Declaration>
+			<Declaration>@property (nonatomic, copy) FYMessageCallback callback</Declaration>
 			
 			
-			<Anchor>//api/name/target</Anchor>
+			<Anchor>//api/name/callback</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYSelTargetActor/setSelector:</TokenIdentifier>
-			<Abstract type="html">The selector which will be performed on target.
-Needs two arguments: as first argument an instance of [FYClient] and as second argument and instance of [FYMessage]
-will be given.</Abstract>
-			<DeclaredIn>FYActor.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/instm/FYMessageCallbackWrapper/setExtension:</TokenIdentifier>
+			<Abstract type="html">Channel extension used to subscribe.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, assign) SEL selector</Declaration>
+			<Declaration>@property (nonatomic, retain) NSDictionary *extension</Declaration>
 			
 			
-			<Anchor>//api/name/selector</Anchor>
+			<Anchor>//api/name/extension</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYSelTargetActor/selector</TokenIdentifier>
-			<Abstract type="html">The selector which will be performed on target.
-Needs two arguments: as first argument an instance of [FYClient] and as second argument and instance of [FYMessage]
-will be given.</Abstract>
-			<DeclaredIn>FYActor.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/instp/FYMessageCallbackWrapper/extension</TokenIdentifier>
+			<Abstract type="html">Channel extension used to subscribe.</Abstract>
+			<DeclaredIn>FYClient.m</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, assign) SEL selector</Declaration>
+			<Declaration>@property (nonatomic, retain) NSDictionary *extension</Declaration>
 			
 			
-			<Anchor>//api/name/selector</Anchor>
+			<Anchor>//api/name/extension</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYSelTargetActor/initWithTarget:selector:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/FYMessageCallbackWrapper/initWithCallback:extension:</TokenIdentifier>
 			<Abstract type="html">Initializer</Abstract>
-			<DeclaredIn>FYActor.h</DeclaredIn>			
+			<DeclaredIn>FYClient.m</DeclaredIn>			
 			
-			<Declaration>- (id)initWithTarget:(id&lt;NSObject&gt;)target selector:(SEL)selector</Declaration>
+			<Declaration>- (id)initWithCallback:(FYMessageCallback)callback extension:(NSDictionary *)extension</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>target</Name>
-					<Abstract type="html">The value for the property target</Abstract>
+					<Name>callback</Name>
+					<Abstract type="html">The block, which should be wrapped.</Abstract>
 				</Parameter><Parameter>
-					<Name>selector</Name>
-					<Abstract type="html">The value for the property selector</Abstract>
+					<Name>extension</Name>
+					<Abstract type="html">An extension as an arbitrary JSON encodeable object according to [ext documentation][45].</Abstract>
 				</Parameter>
 			</Parameters>
 			
-			<Anchor>//api/name/initWithTarget:selector:</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYSelTargetActor/client:receivedMessage:</TokenIdentifier>
-			<Abstract type="html">The given message was received by the given client.</Abstract>
-			<DeclaredIn>FYActor.m</DeclaredIn>			
-			
-			<Declaration>- (void)client:(FYClient *)client receivedMessage:(FYMessage *)message</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>client</Name>
-					<Abstract type="html">The client who received the message.</Abstract>
-				</Parameter><Parameter>
-					<Name>message</Name>
-					<Abstract type="html">The message which was received.</Abstract>
-				</Parameter>
-			</Parameters>
-			
-			<Anchor>//api/name/client:receivedMessage:</Anchor>
+			<Anchor>//api/name/initWithCallback:extension:</Anchor>
 		</Token>
 		
 	</File>

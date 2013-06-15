@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/FYActor.html">
+	<File path="Categories/NSURL+FYHelper.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/FYActor</TokenIdentifier>
-			<Abstract type="html">Used to dynamically bind to meta channel messages.</Abstract>
-			<DeclaredIn>FYActor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cat/NSURL(FYHelper)</TokenIdentifier>
+			<Abstract type="html">Internal category for &apos;FYClient&apos; to replace host name with arguments from hosts advice, to fulfill this advice on
+connection problems. Furthermore it is used to replace &apos;ws&apos; scheme by &apos;http&apos;, if handshake is done asynchronically
+over a separate NSURLConnection.</Abstract>
+			<DeclaredIn>NSURL+FYHelper.h</DeclaredIn>
 			
 			<NodeRef refid="10"/>
 		</Token>
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/FYActor/client:receivedMessage:</TokenIdentifier>
-			<Abstract type="html">The given message was received by the given client.</Abstract>
-			<DeclaredIn>FYActor.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/intfm/NSURL(FYHelper)/URLWithScheme:host:</TokenIdentifier>
+			<Abstract type="html">Replaces the host in an URL with another host.</Abstract>
+			<DeclaredIn>NSURL+FYHelper.h</DeclaredIn>			
 			
-			<Declaration>- (void)client:(FYClient *)client receivedMessage:(FYMessage *)message</Declaration>
+			<Declaration>- (NSURL *)URLWithScheme:(NSString *)scheme host:(NSString *)host</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>client</Name>
-					<Abstract type="html">The client who received the message.</Abstract>
+					<Name>scheme</Name>
+					<Abstract type="html">The scheme of the new URL conforming to RFC 1808.</Abstract>
 				</Parameter><Parameter>
-					<Name>message</Name>
-					<Abstract type="html">The message which was received.</Abstract>
+					<Name>host</Name>
+					<Abstract type="html">The host of the new URL conforming to RFC 1808.</Abstract>
 				</Parameter>
 			</Parameters>
 			
-			<Anchor>//api/name/client:receivedMessage:</Anchor>
+			<Anchor>//api/name/URLWithScheme:host:</Anchor>
 		</Token>
 		
 	</File>

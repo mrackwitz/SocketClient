@@ -1,320 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/FYMessage.html">
+	<File path="Classes/FYDelegateProxy.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/FYMessage</TokenIdentifier>
-			<Abstract type="html">Represents the Bayeux message structure</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/FYDelegateProxy</TokenIdentifier>
+			<Abstract type="html">An instance of FYDelegateProxy is used internally in FYClient to dispatch calls to its delegate.</Abstract>
+			<DeclaredIn>FYDelegateProxy.h</DeclaredIn>
 			
 			<NodeRef refid="4"/>
 		</Token>
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setChannel:</TokenIdentifier>
-			<Abstract type="html">Specify the source or destination of the message.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/clm/FYDelegateProxy/new</TokenIdentifier>
+			<Abstract type="html">Factory method for main queue delegate proxy.</Abstract>
+			<DeclaredIn>FYDelegateProxy.h</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, retain) NSString *channel</Declaration>
+			<Declaration>+ (instancetype)new</Declaration>
 			
 			
-			<Anchor>//api/name/channel</Anchor>
+			<Anchor>//api/name/new</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/channel</TokenIdentifier>
-			<Abstract type="html">Specify the source or destination of the message.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/instm/FYDelegateProxy/setDelegateQueue:</TokenIdentifier>
+			<Abstract type="html">Dispatch queue on which delegate calls are executed.</Abstract>
+			<DeclaredIn>FYDelegateProxy.h</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, retain) NSString *channel</Declaration>
+			<Declaration>@property (nonatomic) dispatch_queue_t delegateQueue</Declaration>
 			
 			
-			<Anchor>//api/name/channel</Anchor>
+			<Anchor>//api/name/delegateQueue</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setVersion:</TokenIdentifier>
-			<Abstract type="html">Indicate the protocol version expected by the client/server.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/instp/FYDelegateProxy/delegateQueue</TokenIdentifier>
+			<Abstract type="html">Dispatch queue on which delegate calls are executed.</Abstract>
+			<DeclaredIn>FYDelegateProxy.h</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, retain) NSString *version</Declaration>
+			<Declaration>@property (nonatomic) dispatch_queue_t delegateQueue</Declaration>
 			
 			
-			<Anchor>//api/name/version</Anchor>
+			<Anchor>//api/name/delegateQueue</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/version</TokenIdentifier>
-			<Abstract type="html">Indicate the protocol version expected by the client/server.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/instm/FYDelegateProxy/setProxiedObject:</TokenIdentifier>
+			<Abstract type="html">The proxied object.</Abstract>
+			<DeclaredIn>FYDelegateProxy.h</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, retain) NSString *version</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;NSObject&gt; proxiedObject</Declaration>
 			
 			
-			<Anchor>//api/name/version</Anchor>
+			<Anchor>//api/name/proxiedObject</Anchor>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setMinimumVersion:</TokenIdentifier>
-			<Abstract type="html">Indicate the oldest protocol version that can be handled by the client/server.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
+			<TokenIdentifier>//apple_ref/occ/instp/FYDelegateProxy/proxiedObject</TokenIdentifier>
+			<Abstract type="html">The proxied object.</Abstract>
+			<DeclaredIn>FYDelegateProxy.h</DeclaredIn>			
 			
-			<Declaration>@property (nonatomic, retain) NSString *minimumVersion</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;NSObject&gt; proxiedObject</Declaration>
 			
 			
-			<Anchor>//api/name/minimumVersion</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/minimumVersion</TokenIdentifier>
-			<Abstract type="html">Indicate the oldest protocol version that can be handled by the client/server.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSString *minimumVersion</Declaration>
-			
-			
-			<Anchor>//api/name/minimumVersion</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setSupportedConnectionTypes:</TokenIdentifier>
-			<Abstract type="html">Included in messages to/from the &quot;/meta/handshake&quot; channel to allow clients and servers to reveal the transports that
-are supported.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSArray *supportedConnectionTypes</Declaration>
-			
-			
-			<Anchor>//api/name/supportedConnectionTypes</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/supportedConnectionTypes</TokenIdentifier>
-			<Abstract type="html">Included in messages to/from the &quot;/meta/handshake&quot; channel to allow clients and servers to reveal the transports that
-are supported.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSArray *supportedConnectionTypes</Declaration>
-			
-			
-			<Anchor>//api/name/supportedConnectionTypes</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setClientId:</TokenIdentifier>
-			<Abstract type="html">Uniquely identifies a client to the Bayeux server.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSString *clientId</Declaration>
-			
-			
-			<Anchor>//api/name/clientId</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/clientId</TokenIdentifier>
-			<Abstract type="html">Uniquely identifies a client to the Bayeux server.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSString *clientId</Declaration>
-			
-			
-			<Anchor>//api/name/clientId</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setAdvice:</TokenIdentifier>
-			<Abstract type="html">Provides a way for servers to inform clients of their preferred mode of client operation so that in conjunction with
-server-enforced limits, Bayeux implementations can prevent resource exhaustion and inelegant failure modes.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSDictionary *advice</Declaration>
-			
-			
-			<Anchor>//api/name/advice</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/advice</TokenIdentifier>
-			<Abstract type="html">Provides a way for servers to inform clients of their preferred mode of client operation so that in conjunction with
-server-enforced limits, Bayeux implementations can prevent resource exhaustion and inelegant failure modes.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSDictionary *advice</Declaration>
-			
-			
-			<Anchor>//api/name/advice</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setFayeId:</TokenIdentifier>
-			<Abstract type="html">Replaces &quot;id&quot; in Bayeux protocol.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSString *fayeId</Declaration>
-			
-			
-			<Anchor>//api/name/fayeId</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/fayeId</TokenIdentifier>
-			<Abstract type="html">Replaces &quot;id&quot; in Bayeux protocol.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSString *fayeId</Declaration>
-			
-			
-			<Anchor>//api/name/fayeId</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setTimestamp:</TokenIdentifier>
-			<Abstract type="html">Sent time of the message.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSDate *timestamp</Declaration>
-			
-			
-			<Anchor>//api/name/timestamp</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/timestamp</TokenIdentifier>
-			<Abstract type="html">Sent time of the message.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSDate *timestamp</Declaration>
-			
-			
-			<Anchor>//api/name/timestamp</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setData:</TokenIdentifier>
-			<Abstract type="html">An object that contains event information.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSDictionary *data</Declaration>
-			
-			
-			<Anchor>//api/name/data</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/data</TokenIdentifier>
-			<Abstract type="html">An object that contains event information.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSDictionary *data</Declaration>
-			
-			
-			<Anchor>//api/name/data</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setSuccessful:</TokenIdentifier>
-			<Abstract type="html">Used to indicate success or failure.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSNumber *successful</Declaration>
-			
-			
-			<Anchor>//api/name/successful</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/successful</TokenIdentifier>
-			<Abstract type="html">Used to indicate success or failure.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSNumber *successful</Declaration>
-			
-			
-			<Anchor>//api/name/successful</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setSubscription:</TokenIdentifier>
-			<Abstract type="html">Specifies the channels the client wishes to subscribe to or unsubscribe from.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSString *subscription</Declaration>
-			
-			
-			<Anchor>//api/name/subscription</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/subscription</TokenIdentifier>
-			<Abstract type="html">Specifies the channels the client wishes to subscribe to or unsubscribe from.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSString *subscription</Declaration>
-			
-			
-			<Anchor>//api/name/subscription</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setError:</TokenIdentifier>
-			<Abstract type="html">Indicate the type of error that occurred when a request returns with a false successful message.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSString *error</Declaration>
-			
-			
-			<Anchor>//api/name/error</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/error</TokenIdentifier>
-			<Abstract type="html">Indicate the type of error that occurred when a request returns with a false successful message.</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSString *error</Declaration>
-			
-			
-			<Anchor>//api/name/error</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/setExt:</TokenIdentifier>
-			<Abstract type="html">SHOULD be an object with top level names distinguished by implementation names (eg. &quot;org.dojo.Bayeux.field&quot;).</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSObject *ext</Declaration>
-			
-			
-			<Anchor>//api/name/ext</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/FYMessage/ext</TokenIdentifier>
-			<Abstract type="html">SHOULD be an object with top level names distinguished by implementation names (eg. &quot;org.dojo.Bayeux.field&quot;).</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>@property (nonatomic, retain) NSObject *ext</Declaration>
-			
-			
-			<Anchor>//api/name/ext</Anchor>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/FYMessage/initWithUserInfo:</TokenIdentifier>
-			<Abstract type="html">Initializer</Abstract>
-			<DeclaredIn>FYMessage.h</DeclaredIn>			
-			
-			<Declaration>- (id)initWithUserInfo:(NSDictionary *)userInfo</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>userInfo</Name>
-					<Abstract type="html">contains unserialized JSON message</Abstract>
-				</Parameter>
-			</Parameters>
-			
-			<Anchor>//api/name/initWithUserInfo:</Anchor>
+			<Anchor>//api/name/proxiedObject</Anchor>
 		</Token>
 		
 	</File>

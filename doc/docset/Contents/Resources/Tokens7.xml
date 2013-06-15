@@ -1,15 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/SRIOConsumer.html">
+	<File path="Classes/FYSelTargetActor.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/SRIOConsumer</TokenIdentifier>
-			<Abstract type="html">TODO specify error better!</Abstract>
-			<DeclaredIn>SRWebSocket.m</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/FYSelTargetActor</TokenIdentifier>
+			<Abstract type="html">Handle received message by a selector which is performed on a given target.</Abstract>
+			<DeclaredIn>FYActor.h</DeclaredIn>
 			
 			<NodeRef refid="7"/>
 		</Token>
 		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYSelTargetActor/setTarget:</TokenIdentifier>
+			<Abstract type="html">The target on which the selector will be performed.</Abstract>
+			<DeclaredIn>FYActor.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, weak) id&lt;NSObject&gt; target</Declaration>
+			
+			
+			<Anchor>//api/name/target</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYSelTargetActor/target</TokenIdentifier>
+			<Abstract type="html">The target on which the selector will be performed.</Abstract>
+			<DeclaredIn>FYActor.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, weak) id&lt;NSObject&gt; target</Declaration>
+			
+			
+			<Anchor>//api/name/target</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYSelTargetActor/setSelector:</TokenIdentifier>
+			<Abstract type="html">The selector which will be performed on target.
+Needs two arguments: as first argument an instance of [FYClient] and as second argument and instance of [FYMessage]
+will be given.</Abstract>
+			<DeclaredIn>FYActor.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) SEL selector</Declaration>
+			
+			
+			<Anchor>//api/name/selector</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/FYSelTargetActor/selector</TokenIdentifier>
+			<Abstract type="html">The selector which will be performed on target.
+Needs two arguments: as first argument an instance of [FYClient] and as second argument and instance of [FYMessage]
+will be given.</Abstract>
+			<DeclaredIn>FYActor.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) SEL selector</Declaration>
+			
+			
+			<Anchor>//api/name/selector</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYSelTargetActor/initWithTarget:selector:</TokenIdentifier>
+			<Abstract type="html">Initializer</Abstract>
+			<DeclaredIn>FYActor.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithTarget:(id&lt;NSObject&gt;)target selector:(SEL)selector</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>target</Name>
+					<Abstract type="html">The value for the property target</Abstract>
+				</Parameter><Parameter>
+					<Name>selector</Name>
+					<Abstract type="html">The value for the property selector</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithTarget:selector:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/FYSelTargetActor/client:receivedMessage:</TokenIdentifier>
+			<Abstract type="html">The given message was received by the given client.</Abstract>
+			<DeclaredIn>FYActor.m</DeclaredIn>			
+			
+			<Declaration>- (void)client:(FYClient *)client receivedMessage:(FYMessage *)message</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>client</Name>
+					<Abstract type="html">The client who received the message.</Abstract>
+				</Parameter><Parameter>
+					<Name>message</Name>
+					<Abstract type="html">The message which was received.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/client:receivedMessage:</Anchor>
+		</Token>
 		
 	</File>
 </Tokens>

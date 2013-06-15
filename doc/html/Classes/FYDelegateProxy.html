@@ -47,6 +47,11 @@
 	
 	
 	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/new">&nbsp;&nbsp;&nbsp;&nbsp;+ new</option>
+	
+	
 	
 	
 	
@@ -80,6 +85,12 @@
 
 
 
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/new">new</a></span></li>
+	
+</ul></li>
+
 
 
 
@@ -106,11 +117,8 @@
 	<td class="specification-title">Inherits from</td>
 	<td class="specification-value">NSProxy</td>
 </tr><tr>
-	<td class="specification-title">Conforms to</td>
-	<td class="specification-value"><a href="../Protocols/FYClientDelegate.html">FYClientDelegate</a></td>
-</tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">FYClient.m</td>
+	<td class="specification-value">FYDelegateProxy.h<br />FYDelegateProxy.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -126,7 +134,7 @@
 dispatch calls to the delegate property. This is used to don&rsquo;t have to think about non-implemented optional protocol
 methods. All declared selectors could be invoked and are forwared to the real delegate implementation stored in
 <a href="#//api/name/proxiedObject"><code>proxiedObject</code></a> property of <code>FYDelegateProxy</code>. So the getter and setter implementation of the property <code>delegate</code> of
-<a href="../Classes/FYClient.html"><code>FYClient</code></a> have to return / mutate <code>self.delegateProxy.proxiedObject</code>.</p>
+<a href="../Classes/FYClient.html"><code>FYClient</code></a> have to return / mutate <code>self.clientDelegateProxy.proxiedObject</code>.</p>
 
 <p>So instead of writing a lot of repeative code like:</p>
 
@@ -137,7 +145,7 @@ methods. All declared selectors could be invoked and are forwared to the real de
 
 <p>You can simply write your code like:</p>
 
-<pre><code>[self.delegateProxy client:self didFoo:foo];
+<pre><code>[self.clientDelegateProxy client:self didFoo:foo];
 </code></pre>
 
 <p>This won&rsquo;t raise any &ldquo;selector not found&rdquo; exception, if this selector is optional and not implemented.</p>
@@ -157,6 +165,13 @@ methods. All declared selectors could be invoked and are forwared to the real de
 
 						<ul class="task-list">
 							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/new">+&nbsp;new</a></code>
+		<span class="tooltip"><p>Factory method for main queue delegate proxy.</p></span>
+	</span>
+	
+	
+</li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/delegateQueue">&nbsp;&nbsp;delegateQueue</a></code>
 		<span class="tooltip"><p>Dispatch queue on which delegate calls are executed.</p></span>
@@ -218,7 +233,7 @@ methods. All declared selectors could be invoked and are forwared to the real de
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">FYClient.m</code><br />
+		<code class="declared-in-ref">FYDelegateProxy.h</code><br />
 	</div>				
 	
 	
@@ -236,7 +251,7 @@ methods. All declared selectors could be invoked and are forwared to the real de
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;NSObject,FYClientDelegate&gt; proxiedObject</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;NSObject&gt; proxiedObject</code></div>
 
     
 	
@@ -259,7 +274,7 @@ methods. All declared selectors could be invoked and are forwared to the real de
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">FYClient.m</code><br />
+		<code class="declared-in-ref">FYDelegateProxy.h</code><br />
 	</div>				
 	
 	
@@ -268,6 +283,53 @@ methods. All declared selectors could be invoked and are forwared to the real de
 					</div>
 					
 					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/new" title="new"></a>
+	<h3 class="subsubtitle method-title">new</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Factory method for main queue delegate proxy.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (instancetype)new</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Factory method for main queue delegate proxy.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FYDelegateProxy.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
 					
 					
@@ -282,7 +344,7 @@ methods. All declared selectors could be invoked and are forwared to the real de
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 redpixtec. GmbH. All rights reserved. (Last updated: 2013-06-14)</span><br />
+						<p><span class="copyright">&copy; 2013 redpixtec. GmbH. All rights reserved. (Last updated: 2013-06-15)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

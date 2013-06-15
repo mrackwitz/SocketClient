@@ -18,6 +18,7 @@
 						<NodeRef refid="5"/>
 						<NodeRef refid="6"/>
 						<NodeRef refid="7"/>
+						<NodeRef refid="8"/>
 						
 					</Subnodes>
 				</Node>
@@ -27,8 +28,8 @@
 					<Name>Categories</Name>
 					<Path>index.html</Path>
 					<Subnodes>
-						<NodeRef refid="8"/>
 						<NodeRef refid="9"/>
+						<NodeRef refid="10"/>
 						
 					</Subnodes>
 				</Node>
@@ -38,8 +39,8 @@
 					<Name>Protocols</Name>
 					<Path>index.html</Path>
 					<Subnodes>
-						<NodeRef refid="10"/>
 						<NodeRef refid="11"/>
+						<NodeRef refid="12"/>
 						
 					</Subnodes>
 				</Node>
@@ -50,48 +51,52 @@
 	<Library>
 		
 		<Node id="1">
+			<Name>DelegateProtocol</Name>
+			<Path>Classes/DelegateProtocol.html</Path>
+		</Node>
+		<Node id="2">
 			<Name>FYBlockActor</Name>
 			<Path>Classes/FYBlockActor.html</Path>
 		</Node>
-		<Node id="2">
+		<Node id="3">
 			<Name>FYClient</Name>
 			<Path>Classes/FYClient.html</Path>
 		</Node>
-		<Node id="3">
+		<Node id="4">
 			<Name>FYDelegateProxy</Name>
 			<Path>Classes/FYDelegateProxy.html</Path>
 		</Node>
-		<Node id="4">
+		<Node id="5">
 			<Name>FYMessage</Name>
 			<Path>Classes/FYMessage.html</Path>
 		</Node>
-		<Node id="5">
+		<Node id="6">
 			<Name>FYMessageCallbackWrapper</Name>
 			<Path>Classes/FYMessageCallbackWrapper.html</Path>
 		</Node>
-		<Node id="6">
+		<Node id="7">
 			<Name>FYSelTargetActor</Name>
 			<Path>Classes/FYSelTargetActor.html</Path>
 		</Node>
-		<Node id="7">
+		<Node id="8">
 			<Name>SRIOConsumer</Name>
 			<Path>Classes/SRIOConsumer.html</Path>
 		</Node>
 		
-		<Node id="8">
+		<Node id="9">
 			<Name>NSDate(Helper)</Name>
 			<Path>Categories/NSDate+Helper.html</Path>
 		</Node>
-		<Node id="9">
-			<Name>NSURL(ReplaceHost)</Name>
-			<Path>Categories/NSURL+ReplaceHost.html</Path>
+		<Node id="10">
+			<Name>NSURL(FYHelper)</Name>
+			<Path>Categories/NSURL+FYHelper.html</Path>
 		</Node>
 		
-		<Node id="10">
+		<Node id="11">
 			<Name>FYActor</Name>
 			<Path>Protocols/FYActor.html</Path>
 		</Node>
-		<Node id="11">
+		<Node id="12">
 			<Name>FYClientDelegate</Name>
 			<Path>Protocols/FYClientDelegate.html</Path>
 		</Node>

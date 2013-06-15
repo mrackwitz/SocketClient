@@ -1,20 +1,20 @@
 <?xml version="1.0" standalone="no"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:docset="http://developer.apple.com/rss/docset_extensions" xml:lang="en">
-    <id>http://redpeppix-gmbh-co-kg.github.io/SocketClient/doc/com.paij.SocketClient.atom/20130614191129</id>
+    <id>http://redpeppix-gmbh-co-kg.github.io/SocketClient/doc/com.paij.SocketClient.atom/20130615152041</id>
     <title type="text">SocketClient Documentation</title>
     <rights>Copyright © 2013 redpixtec. GmbH. All rights reserved.</rights>
     <link rel="self" href="http://redpeppix-gmbh-co-kg.github.io/SocketClient/doc/com.paij.SocketClient.atom"></link>
     <docset:publisherName>paij</docset:publisherName>
     <docset:publisherID>com.paij.documentation</docset:publisherID>
-    <updated>2013-06-14T19:11:29+02:00</updated>
+    <updated>2013-06-15T15:20:41+02:00</updated>
     <entry>
-        <id>tag:redpeppix-gmbh-co-kg.github.io,2013-06-14:com.paij.SocketClient/0.1.0</id>
+        <id>tag:redpeppix-gmbh-co-kg.github.io,2013-06-15:com.paij.SocketClient/0.1.1</id>
         <title type="text">SocketClient</title>
-        <updated>2013-06-14T19:11:29+02:00</updated>
-        <content type="text">SocketClient (v0.1.0)</content>
-        <link rel="enclosure" type="application/octet-stream" href="com.paij.SocketClient" length="114785"></link>
+        <updated>2013-06-15T15:20:41+02:00</updated>
+        <content type="text">SocketClient (v0.1.1)</content>
+        <link rel="enclosure" type="application/octet-stream" href="com.paij.SocketClient" length="119058"></link>
         <docset:identifier>com.paij.SocketClient</docset:identifier>
-        <docset:version>0.1.0</docset:version>
+        <docset:version>0.1.1</docset:version>
         <docset:minimumXcodeVersion>3.0.0</docset:minimumXcodeVersion>
     </entry>
 </feed>
