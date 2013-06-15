@@ -35,6 +35,7 @@
 #import "FYClient.h"
 #import "FYActor.h"
 #import "FYDelegateProxy.h"
+#import "NSURL+FYHelper.h"
 #import "SocketClient_Private.h"
 
 
@@ -125,58 +126,6 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         self.extension = extension;
     }
     return self;
-}
-
-@end
-
-
-
-/**
- Internal category for 'FYClient' to replace host name with arguments from `hosts` advice, to fulfill this advice on
- connection problems.
- */
-@interface NSURL (ReplaceHost)
-
-/**
- Replaces the host in an URL with another host.
- 
- @param scheme  The scheme of the new URL conforming to RFC 1808.
- 
- @param host    The host of the new URL conforming to RFC 1808.
- */
-- (NSURL *)URLWithScheme:(NSString *)scheme host:(NSString *)host;
-
-@end
-
-
-@implementation NSURL (ReplaceHost)
-
-- (NSURL *)URLWithScheme:(NSString *)scheme host:(NSString *)host {
-    NSMutableArray *components = [NSMutableArray new];
-    [components addObject:scheme];
-    [components addObject:@"://"];
-    if (self.user) {
-        [components addObject:self.user];
-        if (self.password) {
-            [components addObject:self.password];
-        }
-        [components addObject:@"@"];
-    }
-    [components addObject:host];
-    if (self.port) {
-        [components addObject:@":"];
-        [components addObject:self.port];
-    }
-    [components addObject:[self.path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    if (self.query) {
-        [components addObject:@"?"];
-        [components addObject:self.query];
-    }
-    if (self.fragment) {
-        [components addObject:@"#"];
-        [components addObject:self.fragment];
-    }
-    return [self.class URLWithString:[components componentsJoinedByString:@""]];
 }
 
 @end
