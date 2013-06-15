@@ -42,3 +42,15 @@
     #define fy_dispatch_release(x) dispatch_release(x)
     #define fymaybe_bridge(x) (x)
 #endif
+
+
+/**
+ Logging macro
+ */
+//#define FYDebug 1
+
+#ifdef FYDebug
+    #define FYLog(...) NSLog(__VA_ARGS__)
+#else
+    #define FYLog(...) 
+#endif

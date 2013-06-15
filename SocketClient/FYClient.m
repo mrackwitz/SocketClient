@@ -37,14 +37,6 @@
 #import "SocketClient_Private.h"
 
 
-//#define FYDebug 1
-
-#ifdef FYDebug
-    #define FYLog(...) NSLog(__VA_ARGS__)
-#else
-    #define FYLog(...) 
-#endif
-
 
 const NSTimeInterval FYClientRetryTimeInterval     = 45;
 const NSTimeInterval FYClientReconnectTimeInterval = 45;
