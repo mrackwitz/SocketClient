@@ -92,7 +92,8 @@ publish-doc: build-doc
 	git add pages; \
 	git commit -m "Updated doc"; \
 	git push origin master; \
-	git checkout $LAST_SYMBOLIC_REF
+	git checkout $$LAST_SYMBOLIC_REF; \
+	git stash pop; \
 
 
 ### Support Targets:
