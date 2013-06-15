@@ -376,8 +376,9 @@ static void FYReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 - (id)init {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:[NSString stringWithFormat:@"Don't use [%@ %@]You must use the designated initializer: %@.",
-                                           self.class, NSStringFromSelector(_cmd), NSStringFromSelector(@selector(initWithURL:))]
+                                   reason:[NSString stringWithFormat:@"Don't use [%@ %@]. You must use the designated "
+                                           "initializer: %@.", self.class, NSStringFromSelector(_cmd),
+                                           NSStringFromSelector(@selector(initWithURL:))]
                                  userInfo:nil];
 }
 
