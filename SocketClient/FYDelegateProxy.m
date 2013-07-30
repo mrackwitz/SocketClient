@@ -63,9 +63,13 @@
     FYLog(@"[%@] %@", self.class, NSStringFromSelector(invocation.selector));
     
     if ([_proxiedObject respondsToSelector:invocation.selector]) {
-        dispatch_async(_delegateQueue, ^{
+        if (_delegateQueue) {
+            dispatch_async(_delegateQueue, ^{
+                [invocation invokeWithTarget:self.proxiedObject];
+             });
+        } else {
             [invocation invokeWithTarget:self.proxiedObject];
-         });
+        }
     }
 }
 
