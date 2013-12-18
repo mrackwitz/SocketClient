@@ -32,7 +32,7 @@
 		714B2A281743BEBD00D03362 /* SocketClient_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 714B2A261743B06900D03362 /* SocketClient_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		714CCFFD176C9179001D3F1B /* FYDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 714CCFFB176C9179001D3F1B /* FYDelegateProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		714CCFFE176C9179001D3F1B /* FYDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 714CCFFC176C9179001D3F1B /* FYDelegateProxy.m */; };
-		714CD004176C9A79001D3F1B /* NSURL+FYHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 714CD002176C9A78001D3F1B /* NSURL+FYHelper.h */; };
+		714CD004176C9A79001D3F1B /* NSURL+FYHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 714CD002176C9A78001D3F1B /* NSURL+FYHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		714CD005176C9A79001D3F1B /* NSURL+FYHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 714CD003176C9A78001D3F1B /* NSURL+FYHelper.m */; };
 		71AC71151741349A004B2B72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC71141741349A004B2B72 /* Foundation.framework */; };
 		71AC71241741349A004B2B72 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC71231741349A004B2B72 /* SenTestingKit.framework */; };
