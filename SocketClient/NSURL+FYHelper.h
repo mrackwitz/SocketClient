@@ -44,6 +44,6 @@
  
  @param host    The host of the new URL conforming to RFC 1808.
  */
-- (NSURL *)URLWithScheme:(NSString *)scheme host:(NSString *)host;
+- (NSURL *)URLWithScheme:(NSString *)scheme host:(NSString *)host __attribute((nonnull));
 
 @end
