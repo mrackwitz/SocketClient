@@ -33,6 +33,9 @@
 @implementation NSURL (FYHelper)
 
 - (NSURL *)URLWithScheme:(NSString *)scheme host:(NSString *)host {
+    NSParameterAssert(scheme != nil);
+    NSParameterAssert(host != nil);
+    
     NSMutableArray *components = [NSMutableArray new];
     [components addObject:scheme];
     [components addObject:@"://"];
