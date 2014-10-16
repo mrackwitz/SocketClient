@@ -12,7 +12,4 @@ Pod::Spec.new do |s|
   s.ios.frameworks        = %w{Security SystemConfiguration UIKit}
   s.libraries             = 'icucore'
   s.dependency            'SocketRocket'
-  s.documentation = {
-    :html => 'http://redpeppix-gmbh-co-kg.github.io/SocketClient/doc/index.html',
-  }
 end
