@@ -40,7 +40,7 @@
 #else
     #define fy_dispatch_retain(x) dispatch_retain(x)
     #define fy_dispatch_release(x) dispatch_release(x)
-    #define fymaybe_bridge(x) (x)
+    #define fy_maybe_bridge(x) (x)
 #endif
 
 
